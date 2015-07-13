@@ -4,12 +4,12 @@ public class NimGame {
 	
 	Stage stage ;
 	
-	public NimGame() {
+	public NimGame() { 
 		
 	}
 	
-	public void run() {
-		
+	public void run() { 
+		stage = new Stage();
 	}
 
 	public static void main(String[] args) {
