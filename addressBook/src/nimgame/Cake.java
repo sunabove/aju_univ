@@ -7,4 +7,9 @@ public class Cake {
 	public Cake() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return this.cakeChar;
+	}
 }
