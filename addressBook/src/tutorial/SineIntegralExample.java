@@ -20,12 +20,7 @@ public class SineIntegralExample {
 		double x = firstAngleRadian;
 		
 		double integration = 0;
-		double dx = 0.0000001;
-		
-		String a = "A";
-		String b = "B"; 
-		
-		a.compareTo(b);
+		double dx = 0.0000001; 
 		
 		for( ; x < secondAngleRadian;  ) {
 			integration += Math.sin( x ) ; 
