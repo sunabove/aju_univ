@@ -4,6 +4,10 @@ import java.io.FileOutputStream;
 import java.io.IOException; 
 public class WriteFileExample {
 	public static void main(String[] args) { 
+		
+		char c = 'A';
+		int i = c;
+		
 		FileOutputStream fop = null;
 		File file;
 		String content = "This is the text content"; 
