@@ -34,7 +34,7 @@ public class LinkedListProgram {
 			msg = "Enter menuKey: ";
 			menuKey = this.userEnterMenu( msg );
 			
-			if( menuKey.equalsIgnoreCase( "L") ) {
+			if( menuKey.equalsIgnoreCase( "L" ) || menuKey.length() < 1 ) {
 				this.listLinkedList();
 			} else if( menuKey.equalsIgnoreCase( "I") ) {
 				this.insertLinkedList();
@@ -53,11 +53,69 @@ public class LinkedListProgram {
 	}
 	
 	public void listLinkedList() {
+		LinkedList node = this.firstNode;
 		
+		String msg = null ;
+		
+		msg = "List linked lists";
+		
+		println();
+		println( msg );
+		println();
+		
+		if( node == null ) {
+			msg = "There is no linked list to print.";
+		}
+		
+		int nodeNo = 0 ;
+		String format = "[ %d ] : %s" ;
+		for( ; node != null ; ) {
+			nodeNo ++ ; 
+			msg = String.format( format, nodeNo, node.toString() );
+			println( msg );
+			
+			node = node.next ; 
+		}
+		
+		if( nodeNo > 0 ) {
+			msg = "There are %d linked lists." ;
+			msg = String.format( msg, nodeNo );
+		}
+		
+		if( msg != null ) {
+			println();
+			print( msg );
+			println();
+		}
 	}
 	
 	public void insertLinkedList() {
+		LinkedList node = new LinkedList();
+		String data ;
+		Scanner scanner = new Scanner( System.in );
+		String msg;
 		
+		msg = "Insert a new linked list" ;
+		println();
+		println( msg );
+		println();
+		
+		msg = "Enter data: " ;
+		do {
+			print( msg );
+			data = scanner.nextLine();
+			data = data.trim();
+		} while( data.length() < 1 ) ;
+		
+		node.data = data;
+		
+		if( this.firstNode == null ) {
+			this.firstNode = node ; 
+		} else if( this.selectedNode != null ){
+			this.selectedNode.next = node ; 
+		}
+		
+		this.selectedNode = node;
 	}
 	
 	public void selectLinkedList() {
