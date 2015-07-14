@@ -111,11 +111,13 @@ public class LinkedListProgram {
 		
 		if( this.firstNode == null ) {
 			this.firstNode = node ; 
+			this.selectedNode = node;
 		} else if( this.selectedNode != null ){
+			node.next = this.selectedNode.next;
 			this.selectedNode.next = node ; 
-		}
+			this.selectedNode = node;
+		}		
 		
-		this.selectedNode = node;
 	}
 	
 	public void selectLinkedList() {
