@@ -72,6 +72,8 @@ public class LinkedListProgram {
 		for( ; node != null ; ) {
 			nodeNo ++ ; 
 			msg = String.format( format, nodeNo, node.toString() );
+			msg = "[ " + nodeNo + " ] : " + node ;
+			msg = "[ " + nodeNo + " ] : " + node.toString() ;
 			println( msg );
 			
 			node = node.next ; 
@@ -116,12 +118,36 @@ public class LinkedListProgram {
 			node.next = this.selectedNode.next;
 			this.selectedNode.next = node ; 
 			this.selectedNode = node;
-		}		
+		}	 
 		
 	}
 	
 	public void selectLinkedList() {
+		String msg ;
 		
+		msg = "Select a linked list object";
+		
+		println();
+		println( msg );
+		println();
+		
+		msg = "Enter linked list number to select : ";
+		
+		int number = this.userEnterInteger( msg );
+		
+		LinkedList node = this.firstNode;
+		
+		int index = 0 ; 
+		if( node != null ) {
+			if( index == number - 1 ) {
+				this.selectedNode = node ;
+				
+				return;
+			} else {
+				node = node.next; 
+				index ++ ; 
+			}
+		}
 	}
 	
 	public void deleteLinkedList() {
@@ -130,6 +156,8 @@ public class LinkedListProgram {
 	
 	
 	public void printMenu() {
+		String msg = null ; 
+		
 		String [] menuStrs = new String[5];
 		int index = 0;
 		menuStrs[ index ++ ] = "[L]: List" ;
@@ -142,6 +170,15 @@ public class LinkedListProgram {
 		
 		for( String menuStr : menuStrs ) {
 			println( menuStr );
+		}
+		
+		LinkedList selectedNode = this.selectedNode;
+		if( selectedNode != null ) {
+			msg = "Selected node data: " + selectedNode.data ;
+			
+			println();
+			println( msg );
+			println();
 		}
 		
 		println();
