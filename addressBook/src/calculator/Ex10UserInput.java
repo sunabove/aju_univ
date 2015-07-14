@@ -1,4 +1,4 @@
-package tutorial; 
+package calculator; 
 import java.util.Scanner; 
 public class Ex10UserInput { 
 	public static void main(String[] args) {
