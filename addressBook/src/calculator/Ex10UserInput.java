@@ -17,14 +17,14 @@ public class Ex10UserInput {
 	}
 	
 	public static int getUserInput( String msg ) {
-		boolean inputOk = false ; 
+		boolean userInputOk = false ; 
 		int a = 0 ;
-		while( ! inputOk ) { 
+		while( ! userInputOk ) { 
 			try { 
 				messageNoLine( msg ); 
 				Scanner scanner = new Scanner( System.in );   
 				a = scanner.nextInt(); 
-				inputOk = true;
+				userInputOk = true;
 			} catch( java.util.InputMismatchException e ) {
 				String message = "Invalid integer! Enter a valid integer, please!";
 				message( message ); 
