@@ -19,7 +19,7 @@ public class NimGame extends NimObject {
 		println();
 		println( ONE_LINE ); 
 		
-		this.stage = new Stage();
+		this.stage = new Stage(); 
 		
 		this.monkeyPlayer = new MonkeyPlayer();
 		this.humanPlayer = new HumanPlayer();
