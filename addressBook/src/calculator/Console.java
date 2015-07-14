@@ -8,22 +8,28 @@ public class Console {
 		
 	}
 	
-	UserInput userEnter() {
-		UserInput userInput = new UserInput();
+	public int getNumber() {
+		int i = 0;
+		return i;
+	}
+	
+	public UserInput userEnter() {
+		UserInput b ;
+		b = new UserInput();
 		
 		String msg;
 		msg = "Enter x value: " ;
-		userInput.x = userEnterInteger( msg );
+		b.x = userEnterInteger( msg );
 		
 		msg = "Enter y value: " ;
 		
-		userInput.y = this.userEnterInteger( msg );
+		b.y = this.userEnterInteger( msg );
 		
 		msg = "Enter a operator ( +, -, *, / ): " ;
 		
-		userInput.oper = this.userEnterOperator( msg );
+		b.oper = this.userEnterOperator( msg );
 		
-		return userInput;
+		return b;
 	}
 	
 	private double userEnterInteger( String msg ) {
@@ -55,6 +61,9 @@ public class Console {
 				oneLine = oneLine.trim();
 				if( oneLine.equals( "+" ) ||  oneLine.equals( "-" ) ||  oneLine.equals( "*" ) ||  oneLine.equals( "/" ) ) {
 					userInputOk = true;
+				} else {
+					String message = "Invalid operator! Enter a valid operator, please!";
+					System.out.println( message ); 
 				}
 			} catch( Exception e ) {
 				String message = "Invalid operator! Enter a valid operator, please!";
@@ -63,7 +72,6 @@ public class Console {
 		} 
 		
 		return oneLine; 
-	}
-	
+	} 
 	
 }
