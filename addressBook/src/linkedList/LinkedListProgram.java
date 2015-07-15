@@ -93,6 +93,7 @@ public class LinkedListProgram {
 	
 	public void insertLinkedList() {
 		LinkedList node = new LinkedList();
+		
 		String data ;
 		Scanner scanner = new Scanner( System.in );
 		String msg;
