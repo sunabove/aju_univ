@@ -137,15 +137,25 @@ public class LinkedListProgram {
 		
 		LinkedList node = this.firstNode;
 		
+		boolean isNodeSelected = false ;
+		
 		int index = 0 ; 
-		while( node != null ) {
+		while( node != null && ! isNodeSelected ) {
 			if( index == number - 1 ) {
 				this.selectedNode = node ;
 				
-				return;
+				isNodeSelected = true ;  
 			}  
 			node = node.next; 
 			index ++ ;  
+		}
+		
+		if( ! isNodeSelected ) {
+			msg = "Error: Invalid linked list number! " ;
+			
+			println();
+			print( msg ); 
+			this.enterToContinue();
 		}
 	}
 	
@@ -181,6 +191,15 @@ public class LinkedListProgram {
 		}
 		
 		println();
+	}
+	
+	public void enterToContinue() {
+		String msg = "Enter to continue: " ;
+		print( msg );
+		Scanner scanner = new Scanner( System.in );   
+		scanner.nextLine();
+		
+		return;
 	}
 	
 	public void println() {
