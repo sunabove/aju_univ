@@ -54,6 +54,7 @@ public class LinkedListProgram {
 	
 	public void listLinkedList() {
 		LinkedList node = this.firstNode;
+		LinkedList selectedNode = this.selectedNode;
 		
 		String msg = null ;
 		
@@ -68,12 +69,11 @@ public class LinkedListProgram {
 		}
 		
 		int nodeNo = 0 ;
-		String format = "[ %d ] : %s" ;
+		String format = "[ %d ] (%s) : %s" ;
 		for( ; node != null ; ) {
 			nodeNo ++ ; 
-			msg = String.format( format, nodeNo, node.toString() );
-			msg = "[ " + nodeNo + " ] : " + node ;
-			msg = "[ " + nodeNo + " ] : " + node.toString() ;
+			String selectedChar = ( node == selectedNode ) ? "*" : " " ; 
+			msg = String.format( format, nodeNo, selectedChar, node.toString() ); 
 			println( msg );
 			
 			node = node.next ; 
@@ -133,20 +133,19 @@ public class LinkedListProgram {
 		
 		msg = "Enter linked list number to select : ";
 		
-		int number = this.userEnterInteger( msg );
+		final int number = this.userEnterInteger( msg );
 		
 		LinkedList node = this.firstNode;
 		
 		int index = 0 ; 
-		if( node != null ) {
+		while( node != null ) {
 			if( index == number - 1 ) {
 				this.selectedNode = node ;
 				
 				return;
-			} else {
-				node = node.next; 
-				index ++ ; 
-			}
+			}  
+			node = node.next; 
+			index ++ ;  
 		}
 	}
 	
@@ -174,7 +173,7 @@ public class LinkedListProgram {
 		
 		LinkedList selectedNode = this.selectedNode;
 		if( selectedNode != null ) {
-			msg = "Selected node data: " + selectedNode.data ;
+			msg = "Selected node data: " + selectedNode ;
 			
 			println();
 			println( msg );
