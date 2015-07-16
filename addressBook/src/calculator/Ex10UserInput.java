@@ -1,9 +1,10 @@
 package calculator; 
+import java.io.DataInputStream;
 import java.util.Scanner; 
 public class Ex10UserInput { 
 	public static void main(String[] args) {
 		int x = 3; 
-		assert x == 1 : x ;
+		assert x == 1 : x ; 
 		
 		message( "User Input Program" );  
 		int a ;
