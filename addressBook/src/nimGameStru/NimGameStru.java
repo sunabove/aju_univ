@@ -34,12 +34,8 @@ public class NimGameStru extends NimObject {
 	}
 
 	public void playOneStage() {
-		int[] cakeCounts = new int[3];
-
-		int maxCakeCount = 9;
-		for (int i = 0, iLen = cakeCounts.length; i < iLen; i++) {
-			cakeCounts[i] = (int) (1 + maxCakeCount * Math.random());
-		}
+		
+		Stage stage = new Stage();
 		
 		Monkey monkey = new Monkey();
 		Human human = new Human();
@@ -47,16 +43,16 @@ public class NimGameStru extends NimObject {
 		int winner = 0;
 
 		while (winner == 0) {
-			this.printCakes(cakeCounts);
+			this.printCakes(stage.cakeCounts);
 			//playHuman(cakeCounts);
-			human.play(cakeCounts);
+			human.play( stage );
 
-			if (this.isAllZero(cakeCounts)) {
+			if (this.isAllZero(stage.cakeCounts)) {
 				winner = 1;
 			} else {
 				//playMonkey(cakeCounts);
-				monkey.play( cakeCounts );
-				if (this.isAllZero(cakeCounts)) {
+				monkey.play( stage );
+				if (this.isAllZero( stage.cakeCounts)) {
 					winner = 2;
 				}
 			}

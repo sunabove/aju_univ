@@ -6,8 +6,10 @@ public class Monkey extends NimObject {
 
 	}
 
-	public void play(int[] cakeCounts) {
+	public void play( Stage stage ) {
 		String msg;
+		
+		int [] cakeCounts = stage.cakeCounts;
 
 		int cakeCount;
 		int eatCount = -1;
