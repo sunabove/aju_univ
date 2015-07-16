@@ -40,27 +40,27 @@ public class NimGameStru extends NimObject {
 		Monkey monkey = new Monkey();
 		Human human = new Human();
 
-		int winner = 0;
+		Player winner = null ;
 
-		while (winner == 0) {
+		while (winner == null ) {
 			this.printCakes(stage.cakeCounts);
 			//playHuman(cakeCounts);
 			human.play( stage );
 
 			if (this.isAllZero(stage.cakeCounts)) {
-				winner = 1;
+				winner = human ;
 			} else {
 				//playMonkey(cakeCounts);
 				monkey.play( stage );
 				if (this.isAllZero( stage.cakeCounts)) {
-					winner = 2;
+					winner = monkey ;
 				}
 			}
 		}
 
 		String msg = null;
 
-		if (winner == 1) {
+		if (winner == human ) {
 			msg = "Congratulation: You have won!";
 		} else {
 			msg = "Failed.";

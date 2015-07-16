@@ -1,6 +1,6 @@
 package nimGameStru;
 
-public class Monkey extends NimObject {
+public class Monkey extends Player {
 
 	public Monkey() {
 

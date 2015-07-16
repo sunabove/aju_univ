@@ -2,7 +2,7 @@ package nimGameStru;
 
 import java.util.Scanner;
 
-public class Human extends NimObject {
+public class Human extends Player {
 
 	public Human() {
 
