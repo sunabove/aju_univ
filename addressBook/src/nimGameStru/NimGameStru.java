@@ -38,7 +38,7 @@ public class NimGameStru extends NimObject {
 		Stage stage = new Stage();
 		
 		Player monkey = new Monkey();
-		Player human = new Human();
+		Player human = new Human(); 
 
 		Player winner = null ;
 
