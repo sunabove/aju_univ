@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class LinkedListProgram {
 	
-	LinkedList firstNode ;
-	LinkedList selectedNode ; 
+	LinkedList<Integer> firstNode ;
+	LinkedList<Integer> selectedNode ; 
 	
 	String line = "################################################" ;
 	
@@ -53,8 +53,8 @@ public class LinkedListProgram {
 	}
 	
 	public void listLinkedList() {
-		LinkedList node = this.firstNode;
-		LinkedList selectedNode = this.selectedNode;
+		LinkedList<Integer> node = this.firstNode;
+		LinkedList<Integer> selectedNode = this.selectedNode;
 		
 		String msg = null ;
 		
@@ -92,9 +92,9 @@ public class LinkedListProgram {
 	}
 	
 	public void insertLinkedList() {
-		LinkedList node = new LinkedList();
+		LinkedList<Integer> node = new LinkedList<Integer>();
 		
-		String data ;
+		int data ;
 		Scanner scanner = new Scanner( System.in );
 		String msg;
 		
@@ -104,11 +104,8 @@ public class LinkedListProgram {
 		println();
 		
 		msg = "Enter data: " ;
-		do {
-			print( msg );
-			data = scanner.nextLine();
-			data = data.trim();
-		} while( data.length() < 1 ) ;
+		print( msg );
+		data = scanner.nextInt(); 
 		
 		node.data = data;
 		
