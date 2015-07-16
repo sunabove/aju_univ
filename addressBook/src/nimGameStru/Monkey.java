@@ -1,6 +1,6 @@
 package nimGameStru;
 
-public class Monkey {
+public class Monkey extends NimObject {
 
 	public Monkey() {
 
@@ -29,17 +29,5 @@ public class Monkey {
 		println();
 		println(msg);
 		println();
-	}
-	
-	public void println() {
-		System.out.println();
-	}
-
-	public void println(String msg) {
-		System.out.println(msg);
-	}
-
-	public void print(String msg) {
-		System.out.print(msg);
-	}
+	} 
 }

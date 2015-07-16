@@ -2,7 +2,7 @@ package nimGameStru;
 
 import java.util.Scanner;
 
-public class NimGameStru {
+public class NimGameStru extends NimObject {
 
 	public NimGameStru() {
 
@@ -42,12 +42,14 @@ public class NimGameStru {
 		}
 		
 		Monkey monkey = new Monkey();
+		Human human = new Human();
 
 		int winner = 0;
 
 		while (winner == 0) {
 			this.printCakes(cakeCounts);
-			playHuman(cakeCounts);
+			//playHuman(cakeCounts);
+			human.play(cakeCounts);
 
 			if (this.isAllZero(cakeCounts)) {
 				winner = 1;
@@ -177,81 +179,7 @@ public class NimGameStru {
 			newStage = false;
 		}
 		return newStage;
-	}
-
-	public void enterToContinue() {
-		String msg = "Enter to continue: ";
-		print(msg);
-		Scanner scanner = new Scanner(System.in);
-		scanner.nextLine();
-
-		return;
-	}
-
-	public void println() {
-		System.out.println();
-	}
-
-	public void println(String msg) {
-		System.out.println(msg);
-	}
-
-	public void print(String msg) {
-		System.out.print(msg);
-	}
-
-	private int userEnterInteger(String msg, int min, int max) {
-		boolean userInputOk = false;
-		int number = 0;
-		while (!userInputOk) {
-			try {
-				print(msg);
-				Scanner scanner = new Scanner(System.in);
-				number = scanner.nextInt();
-
-				String error = null;
-				if (number < min) {
-					error = "Input number is less than %d";
-					error = String.format(error, min);
-				} else if (number > max) {
-					error = "Input number is greater than %d";
-					error = String.format(error, max);
-				} else if (min <= number && number <= max) {
-					userInputOk = true;
-				}
-
-				if (error != null) {
-					println();
-					print(error);
-					println();
-				}
-			} catch (Exception e) {
-				String message = "Invalid integer! Enter a valid integer, please!";
-				System.out.println(message);
-			}
-		}
-		return number;
-	}
-
-	private String userEnterMenu(String msg) {
-		boolean userInputOk = false;
-		String oneLine = null;
-		while (!userInputOk) {
-			try {
-				if (msg != null && msg.length() > 0) {
-					print(msg);
-				}
-				Scanner scanner = new Scanner(System.in);
-				oneLine = scanner.nextLine();
-				oneLine = oneLine.trim();
-				userInputOk = true;
-			} catch (Exception e) {
-				String message = "Invalid menu key! Enter a valid menu key, please!";
-				System.out.println(message);
-			}
-		}
-		return oneLine;
-	}
+	} 
 
 	public static void main(String[] args) {
 		NimGameStru nimGame = new NimGameStru();
