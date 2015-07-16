@@ -40,6 +40,8 @@ public class NimGameStru {
 		for (int i = 0, iLen = cakeCounts.length; i < iLen; i++) {
 			cakeCounts[i] = (int) (1 + maxCakeCount * Math.random());
 		}
+		
+		Monkey monkey = new Monkey();
 
 		int winner = 0;
 
@@ -50,7 +52,8 @@ public class NimGameStru {
 			if (this.isAllZero(cakeCounts)) {
 				winner = 1;
 			} else {
-				playMonkey(cakeCounts);
+				//playMonkey(cakeCounts);
+				monkey.play( cakeCounts );
 				if (this.isAllZero(cakeCounts)) {
 					winner = 2;
 				}
