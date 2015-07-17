@@ -10,10 +10,13 @@ public class ChatProcess extends ChatObject {
 	DataInputStream in ;
 	DataOutputStream out ; 
 	ChatServer chatServer;
+	int id ; 
+	static int LAST_ID ; 
 	
 	String userName ;
 	
 	public ChatProcess(Socket socket, ChatServer chatServer) throws Exception { 
+		this.id = LAST_ID ++ ; 
 		this.socket = socket;
 		this.chatServer = chatServer ; 
 		this.in = new DataInputStream( socket.getInputStream() );
