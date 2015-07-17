@@ -11,7 +11,7 @@ public class ChatProcess extends ChatObject {
 	DataOutputStream out ; 
 	ChatServer chatServer;
 	
-	String name;
+	String userName ;
 	
 	public ChatProcess(Socket socket, ChatServer chatServer) throws Exception { 
 		this.socket = socket;
@@ -35,9 +35,25 @@ public class ChatProcess extends ChatObject {
 				boolean goOn = true;
 				DataInputStream in = ChatProcess.this.in ;  
 				ChatServer chatServer = ChatProcess.this.chatServer ; 
+				
+				// read user name at first
+				String nameInfo = null; 
+				try {
+					nameInfo = in.readUTF();
+				} catch (IOException e1) {
+					nameInfo = null;
+				}
+				
+				String userName = ""; 
+				if( nameInfo != null ) {
+					userName = nameInfo.substring(5).trim();
+					ChatProcess.this.userName = userName ; 
+				}
+				
 				while (goOn) {
 					try {
 						msg = in.readUTF(); 
+						msg = "[ " + userName + " ] " + msg ; 
 						chatServer.sendMessageToAllClients(msg);
 					} catch (IOException e) {
 						e.printStackTrace();
