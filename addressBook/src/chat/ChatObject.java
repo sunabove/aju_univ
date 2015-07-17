@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class ChatObject {
 
 	String line = "#######################################";
+	String msgEnterPrompt = "Enter message: " ; 
+	
+	boolean showMsgPrompt = false ; 
 	
 	public ChatObject() {
 	}
@@ -24,7 +27,14 @@ public class ChatObject {
 				while (goOn) {
 					try {
 						msg = in.readUTF();
-						println( msg );
+						if( showMsgPrompt ) {
+							println();
+							println( msg );
+							printMsgPrompt();
+							showMsgPrompt = true;
+						} else if( ! showMsgPrompt ){
+							println( msg );
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 						goOn = false ; 
@@ -57,7 +67,8 @@ public class ChatObject {
 				boolean goOn = true;
 				while (goOn) {
 					try {
-						print( "Enter message: " );
+						printMsgPrompt();
+						showMsgPrompt = true ; 
 						msg = scanner.nextLine();
 						if( msg.equalsIgnoreCase( "Q")) {
 							goOn = false ;
@@ -82,6 +93,10 @@ public class ChatObject {
 		Runnable runnable = new MsgWriteRunnable() ; 
 		Thread thread = new Thread( runnable );
 		thread.start();
+	}
+	
+	public void printMsgPrompt() {
+		print( msgEnterPrompt );
 	}
 
 	public void println() {

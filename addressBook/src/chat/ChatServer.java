@@ -10,13 +10,14 @@ public class ChatServer extends ChatObject implements Runnable {
 
 	public ChatServer() throws IOException {
 		serverSocket = new ServerSocket(port);
-		serverSocket.setSoTimeout(10000);
+		//serverSocket.setSoTimeout(10000);
 	}
 
 	public void run() {
 		try {
 			System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
 			Socket socket = serverSocket.accept();
+			
 			System.out.println("Just connected to " + socket.getRemoteSocketAddress());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
