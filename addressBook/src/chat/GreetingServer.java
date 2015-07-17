@@ -1,6 +1,7 @@
 package chat;
 
 import java.net.*;
+import java.util.Scanner;
 import java.io.*;
 
 public class GreetingServer extends Thread {
@@ -14,18 +15,28 @@ public class GreetingServer extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				System.out.println("Waiting for client on port "
-						+ serverSocket.getLocalPort() + "...");
+				System.out.println("Waiting for client on port " + serverSocket.getLocalPort() + "...");
 				Socket socket = serverSocket.accept();
-				System.out.println("Just connected to "
-						+ socket.getRemoteSocketAddress());
-				DataInputStream in = new DataInputStream(
-						socket.getInputStream());
-				System.out.println(in.readUTF());
-				DataOutputStream out = new DataOutputStream(
-						socket.getOutputStream());
-				out.writeUTF("Thank you for connecting to "
-						+ socket.getLocalSocketAddress() + "\nGoodbye!");
+				System.out.println("Just connected to " + socket.getRemoteSocketAddress());
+				DataInputStream in = new DataInputStream(socket.getInputStream());
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+				
+				Scanner scanner = new Scanner( System.in );
+				boolean goOn = true ;
+				
+				String userInputMsg ;
+				String serverMsg ; 
+				while( goOn ) {
+					userInputMsg = scanner.nextLine();
+					if( userInputMsg.equalsIgnoreCase( "Q" ) ) {
+						goOn = false ; 
+					} else {
+						out.writeUTF( userInputMsg );
+						serverMsg = in.readUTF();
+						System.out.println( serverMsg );
+					}
+				} 
+				
 				socket.close();
 			} catch (SocketTimeoutException s) {
 				System.out.println("Socket timed out!");
@@ -38,7 +49,7 @@ public class GreetingServer extends Thread {
 	}
 
 	public static void main(String[] args) {
-		int port = 1000 ;
+		int port = 1000;
 		try {
 			Thread t = new GreetingServer(port);
 			t.start();
