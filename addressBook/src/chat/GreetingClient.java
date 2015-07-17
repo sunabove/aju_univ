@@ -10,16 +10,14 @@ public class GreetingClient {
 		try {
 			System.out.println("Connecting to " + serverName + " on port "
 					+ port);
-			Socket client = new Socket(serverName, port);
+			Socket socket = new Socket(serverName, port);
 			System.out.println("Just connected to "
-					+ client.getRemoteSocketAddress());
-			OutputStream outToServer = client.getOutputStream();
-			DataOutputStream out = new DataOutputStream(outToServer);
-			out.writeUTF("Hello from " + client.getLocalSocketAddress());
-			InputStream inFromServer = client.getInputStream();
-			DataInputStream in = new DataInputStream(inFromServer);
+					+ socket.getRemoteSocketAddress()); 
+			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			DataInputStream in = new DataInputStream(socket.getInputStream());
+			out.writeUTF("Hello from " + socket.getLocalSocketAddress()); 
 			System.out.println("Server says " + in.readUTF());
-			client.close();
+			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
