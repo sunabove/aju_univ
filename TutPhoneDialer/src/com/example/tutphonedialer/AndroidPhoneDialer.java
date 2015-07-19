@@ -22,7 +22,7 @@ public class AndroidPhoneDialer extends Activity {
 			startActivity(dialIntent);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error = "전화를 걸수가 없습니다.";
+			error = "이 기기에서는 전화를 걸수가 없습니다.";
 		}
 		
 		if( error != null ) {
