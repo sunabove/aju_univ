@@ -1,0 +1,9 @@
+/bin/
+*/bin/
+/.metadata/
+/.recommenders/
+*.log
+*.tmp
+*.apk
+*.jar
+*.dex
