@@ -4,5 +4,6 @@
     <string name="app_name">HelloWorldText</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="first_label">첫 화면 입니다.</string>
 
 </resources>
