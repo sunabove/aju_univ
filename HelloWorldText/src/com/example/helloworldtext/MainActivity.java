@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -14,7 +16,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		final Button myButton  = (Button) findViewById( R.id.myButton) ; 
+		final EditText firstNumberEt = (EditText) findViewById( R.id.firstNumber );
+		
+		String firstNumberStr = "" + firstNumberEt.getText();
+		
+		final TextView resultTv = (TextView) findViewById( R.id.myResult );
+		
+		resultTv.setText( "aaaaaa" );
+		
+		final Button myButton  = null ; 
 		
 		myButton.setOnClickListener( new View.OnClickListener() { 
 			int clickCount ; 
@@ -23,46 +33,7 @@ public class MainActivity extends Activity {
 				myButton.setText( "click count" +  clickCount ++ );
 			} 
 		} );
-	}
-	
-	protected void onCreateSimple(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		final Button myButton  = (Button) findViewById( R.id.myButton) ; 
-		
-		View.OnClickListener listener = new View.OnClickListener() { 
-			int clickCount ; 
-			@Override
-			public void onClick(View v) { 
-				myButton.setText( "click count" +  clickCount ++ );
-			} 
-		};
-		
-		myButton.setOnClickListener( listener );
-	}
-	
-	protected void onCreateDetail(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		View view ;
-		view = findViewById( R.id.myButton) ; 
-		final Button myButton ;
-		myButton = (Button) view ;
-		
-		class MyOnClickListener implements View.OnClickListener { 
-			int clickCount ; 
-			@Override
-			public void onClick(View v) { 
-				myButton.setText( "click count" +  clickCount ++ );
-			} 
-		}
-		
-		MyOnClickListener listener = new MyOnClickListener();
-		
-		myButton.setOnClickListener( listener );
-	}
+	} 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
