@@ -18,19 +18,26 @@ public class MainActivity extends Activity {
 		
 		final EditText firstNumberEt = (EditText) findViewById( R.id.firstNumber );
 		
-		String firstNumberStr = "" + firstNumberEt.getText();
+		final EditText secondNumberEt = (EditText) findViewById( R.id.secondNumber );
 		
-		final TextView resultTv = (TextView) findViewById( R.id.myResult );
+		final TextView resultTv = (TextView) findViewById( R.id.resultTv );
 		
-		resultTv.setText( "aaaaaa" );
+		final Button plusBtn  = (Button) findViewById( R.id.plusBtn ) ; 
 		
-		final Button myButton  = null ; 
-		
-		myButton.setOnClickListener( new View.OnClickListener() { 
-			int clickCount ; 
+		plusBtn.setOnClickListener( new View.OnClickListener() {  
 			@Override
 			public void onClick(View v) { 
-				myButton.setText( "click count" +  clickCount ++ );
+				String firstNumberStr = "" + firstNumberEt.getText();
+				String secondNumberStr = "" + secondNumberEt.getText();
+				
+				double firstNum  = Double.parseDouble( firstNumberStr.trim() );
+				double secondNum = Double.parseDouble( secondNumberStr.trim() );
+				
+				double result = firstNum + secondNum ;
+				
+				String resultStr = "" + result ; 
+				
+				resultTv.setText( resultStr ); 
 			} 
 		} );
 	} 
