@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class AndroidPhoneDialerActivity extends Activity {
 
@@ -14,17 +15,31 @@ public class AndroidPhoneDialerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_android_phone_dialer); 
 		
+		TextView messageTv = (TextView) findViewById( R.id.messageTv );
+		
+		String msg = null ; 
+		
 		/** Create our Intent to call the Dialer */
 		/** Pass the Dialer the number 5551212 */
-		Intent DialIntent = new
+		Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:010 2248 0000"));
 		///Intent(Intent.DIAL_ACTION,Uri.parse("tel:5551212"));
-		Intent(Intent.ACTION_DIAL, Uri.parse("tel:010 2248 0000"));
+		
 		/** Use NEW_TASK_LAUNCH to launch the Dialer Activity */
 		//DialIntent.setLaunchFlags(Intent.NEW_TASK_LAUNCH );
-		DialIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+		dialIntent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
 		
 		/** Finally start the Activity */
-		startActivity(DialIntent);
+		try {
+			startActivity(dialIntent);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			
+			msg = "Cannot call";
+		}
+		
+		if( msg != null ) {
+			messageTv.setText( msg );
+		}
 	}
 
 	@Override
