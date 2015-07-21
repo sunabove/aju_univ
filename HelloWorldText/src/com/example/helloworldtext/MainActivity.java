@@ -17,18 +17,13 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		final EditText firstNumberEt = (EditText) findViewById(R.id.firstNumber);
-
 		final EditText secondNumberEt = (EditText) findViewById(R.id.secondNumber);
-
 		final TextView resultTv = (TextView) findViewById(R.id.resultTv);
-		
-		final TextView messageTv = (TextView) findViewById( R.id.messageTv );
-
+		final TextView messageTv = (TextView) findViewById(R.id.messageTv);
 		final Button plusBtn = (Button) findViewById(R.id.plusBtn);
-		
-		String msg = "두개의 숫자를 입력하면 덧셈 결과가 출력됩니다." ;
-		
-		messageTv.setText( msg );
+
+		String msg = "두개의 숫자를 입력하면 덧셈 결과가 출력됩니다.";
+		messageTv.setText(msg);
 
 		plusBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -37,14 +32,36 @@ public class MainActivity extends Activity {
 					String firstNumberStr = "" + firstNumberEt.getText();
 					String secondNumberStr = "" + secondNumberEt.getText();
 
-					double firstNum = Double.parseDouble(firstNumberStr.trim());
-					double secondNum = Double.parseDouble(secondNumberStr.trim());
+					String msg = null;
+					Double firstNum = null;
+					try {
+						firstNum = Double.parseDouble(firstNumberStr.trim());
+					} catch (Exception e) {
+						firstNum = null;
+					}
+					if (firstNum == null) {
+						msg = "Thre first number is wrong!";
+					} else if (firstNum != null) {
+						Double secondNum = null;
+						try {
+							secondNum = Double.parseDouble(secondNumberStr.trim());
+						} catch (Exception e) {
+							secondNum = null;
+						}
 
-					double result = firstNum + secondNum;
-
-					String resultStr = "" + result;
-
-					resultTv.setText(resultStr);
+						if (secondNum == null) {
+							msg = "The second number is wrong!";
+						} else if (secondNum != null) { 
+							double result = firstNum + secondNum; 
+							String resultStr = "" + result; 
+							msg = "두개의 숫자를 입력하면 덧셈 결과가 출력됩니다.";
+							resultTv.setText(resultStr);
+						}
+					}
+					
+					if( msg != null ) {
+						messageTv.setText( msg );
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
