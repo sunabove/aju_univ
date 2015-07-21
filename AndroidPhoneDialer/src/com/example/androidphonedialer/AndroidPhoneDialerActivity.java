@@ -31,6 +31,7 @@ public class AndroidPhoneDialerActivity extends Activity {
 		/** Finally start the Activity */
 		try {
 			startActivity(dialIntent);
+			msg = "Calling now ..."; 
 		} catch (Exception e) { 
 			e.printStackTrace();
 			
