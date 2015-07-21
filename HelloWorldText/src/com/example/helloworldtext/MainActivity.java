@@ -53,9 +53,12 @@ public class MainActivity extends Activity {
 							msg = "The second number is wrong!";
 						} else if (secondNum != null) { 
 							double result = firstNum + secondNum; 
+							int resultInt = (int) result ; 
+							resultInt = R.string.app_name ; 
 							String resultStr = "" + result; 
 							msg = "두개의 숫자를 입력하면 덧셈 결과가 출력됩니다.";
-							resultTv.setText(resultStr);
+							//resultTv.setText(resultStr);
+							resultTv.setText( resultInt );
 						}
 					}
 					
