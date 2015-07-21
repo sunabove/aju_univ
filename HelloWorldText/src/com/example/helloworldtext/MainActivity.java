@@ -15,32 +15,42 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		final EditText firstNumberEt = (EditText) findViewById(R.id.firstNumber);
+
+		final EditText secondNumberEt = (EditText) findViewById(R.id.secondNumber);
+
+		final TextView resultTv = (TextView) findViewById(R.id.resultTv);
 		
-		final EditText firstNumberEt = (EditText) findViewById( R.id.firstNumber );
+		final TextView messageTv = (TextView) findViewById( R.id.messageTv );
+
+		final Button plusBtn = (Button) findViewById(R.id.plusBtn);
 		
-		final EditText secondNumberEt = (EditText) findViewById( R.id.secondNumber );
+		String msg = "두개의 숫자를 입력하면 덧셈 결과가 출력됩니다." ;
 		
-		final TextView resultTv = (TextView) findViewById( R.id.resultTv );
-		
-		final Button plusBtn  = (Button) findViewById( R.id.plusBtn ) ; 
-		
-		plusBtn.setOnClickListener( new View.OnClickListener() {  
+		messageTv.setText( msg );
+
+		plusBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) { 
-				String firstNumberStr = "" + firstNumberEt.getText();
-				String secondNumberStr = "" + secondNumberEt.getText();
-				
-				double firstNum  = Double.parseDouble( firstNumberStr.trim() );
-				double secondNum = Double.parseDouble( secondNumberStr.trim() );
-				
-				double result = firstNum + secondNum ;
-				
-				String resultStr = "" + result ; 
-				
-				resultTv.setText( resultStr ); 
-			} 
-		} );
-	} 
+			public void onClick(View v) {
+				try {
+					String firstNumberStr = "" + firstNumberEt.getText();
+					String secondNumberStr = "" + secondNumberEt.getText();
+
+					double firstNum = Double.parseDouble(firstNumberStr.trim());
+					double secondNum = Double.parseDouble(secondNumberStr.trim());
+
+					double result = firstNum + secondNum;
+
+					String resultStr = "" + result;
+
+					resultTv.setText(resultStr);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -47,4 +47,13 @@
         android:text="= 결과"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:id="@+id/messageTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="107dp"
+        android:layout_y="371dp"
+        android:text="메시지 출력"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 </AbsoluteLayout>
