@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class AutoCompleteActivity extends Activity {
@@ -21,6 +22,7 @@ public class AutoCompleteActivity extends Activity {
 	CheckBox myCheckBox ; 
 	RadioButton femaleRadio ;
 	RadioButton maleRadio ; 
+	Spinner mySpinner ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,10 @@ public class AutoCompleteActivity extends Activity {
 			}
 		});
 
-		ArrayAdapter<String> monthArray = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Months);
+		ArrayAdapter<String> monthAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Months);
 		
 		final AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.testAutoComplete);
-		textView.setAdapter(monthArray);
+		textView.setAdapter(monthAdapter);
 		
 		final Button changeButton = (Button) findViewById(R.id.autoCompleteButton);
 		changeButton.setOnClickListener(new Button.OnClickListener() {
@@ -90,11 +92,17 @@ public class AutoCompleteActivity extends Activity {
 		
 		this.femaleRadio.setOnClickListener( radioListener );
 		this.maleRadio.setOnClickListener( radioListener );
+		
+		this.mySpinner = (Spinner) findViewById( R.id.mySpinner );
+		ArrayAdapter<String> daysAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, DAYS );
+		this.mySpinner.setAdapter( daysAdapter );
 
 	}
 
 	static final String[] Months = new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November",
 			"December" };
+	
+	static final String[] DAYS = new String[] { "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" };
 
 	public void changeOption(AutoCompleteTextView text) {
 		if (text.getHeight() == 100) {
