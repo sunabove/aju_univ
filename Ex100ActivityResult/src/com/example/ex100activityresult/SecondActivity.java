@@ -31,6 +31,19 @@ public class SecondActivity extends Activity {
 		});
 	}
 	
+	public void onResume() {
+		super.onResume();
+		
+		Intent receiveIntent = this.getIntent();
+		if( receiveIntent != null ) {
+			String sendStr = receiveIntent.getStringExtra( "sendStr" );
+			if( sendStr != null ) {
+				this.userInputEt.setText( sendStr );
+			}
+		}
+		
+	}
+	
 	public void onClickSecondButton( View v ) {
 		// Create intent to deliver some kind of result data
 		String userInputStr = "" + this.userInputEt.getText();

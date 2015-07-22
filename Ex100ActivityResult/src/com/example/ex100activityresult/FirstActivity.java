@@ -35,7 +35,10 @@ public class FirstActivity extends Activity {
 	
 	public void onClickShowSecondActivityBtn() {
 		Activity fromActivity = this ; 
+		String sendStr = "Hello....";
 		Intent intent = new Intent( fromActivity, SecondActivity.class );
+		intent.putExtra( "sendStr", sendStr );
+		
 		//startActivity( intent ); 
 		int requestCode = 1 ; 
 		startActivityForResult( intent, requestCode ); 
