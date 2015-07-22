@@ -3,9 +3,33 @@
     tools:context="com.example.androidviews.TestActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/test_AutoComplete"
+        android:orderInCategory="100" 
+        android:title="Auto Complete"/>
+    
+    <item
+        android:id="@+id/test_Button"
+        android:orderInCategory="101" 
+        android:title="My Button"/> 
+        
+    <item
+        android:id="@+id/test_CheckBox"
+        android:orderInCategory="102" 
+        android:title="Check Box"/> 
+        
+    <item
+        android:id="@+id/test_EditText"
+        android:orderInCategory="103" 
+        android:title="Edit Text"/> 
+        
+    <item
+        android:id="@+id/test_RadioGroup"
+        android:orderInCategory="104" 
+        android:title="Radio Group"/> 
+        
+    <item
+        android:id="@+id/test_Spinner"
+        android:orderInCategory="105" 
+        android:title="My Spinner"/> 
 
 </menu>
