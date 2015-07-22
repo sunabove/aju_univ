@@ -10,12 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class AutoCompleteActivity extends Activity {
 
 	TextView messageTv;
 	Button okBtn;
+	CheckBox myCheckBox ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,10 @@ public class AutoCompleteActivity extends Activity {
 		});
 
 		ArrayAdapter<String> monthArray = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Months);
+		
 		final AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.testAutoComplete);
 		textView.setAdapter(monthArray);
+		
 		final Button changeButton = (Button) findViewById(R.id.autoCompleteButton);
 		changeButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -46,6 +50,26 @@ public class AutoCompleteActivity extends Activity {
 			public void onClick(View v) {
 				changeOption2(textView);
 			}
+		});
+		
+		this.myCheckBox = (CheckBox) findViewById( R.id.myCheckBox );
+		this.myCheckBox.setOnClickListener( new OnClickListener () {
+
+			@Override
+			public void onClick(View v) { 
+				//boolean isSelected = myCheckBox.isSelected();
+				boolean isChecked = myCheckBox.isChecked();
+				
+				String msg = "";
+				if( isChecked ) {
+					msg = "당신은 내국인입니다.";
+				} else {
+					msg = "당신은 외국인입니다.";
+				}
+				
+				messageTv.setText( msg );
+			}
+			
 		});
 
 	}
