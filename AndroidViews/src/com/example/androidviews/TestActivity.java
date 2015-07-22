@@ -1,6 +1,7 @@
 package com.example.androidviews;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,11 +47,13 @@ public class TestActivity extends Activity {
 		
 		String msg = "선택한 메뉴의 아이디는 %d 입니다.";
 		
-		msg = String.format( msg, id );
+		msg = String.format( msg, id ); 
 		
 		this.messageTv.setText( msg );
 		
 		if (id == R.id.test_AutoComplete ) {
+			Intent intent = new Intent( this, AutoCompleteActivity.class );
+			startActivity( intent );
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
