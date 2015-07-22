@@ -23,4 +23,25 @@
         android:layout_height="wrap_content"
         android:text="Ok" />
 
+    <AutoCompleteTextView
+        android:id="@+id/testAutoComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
+    <Button
+        android:id="@+id/autoCompleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Layout" />
+
+    <Button
+        android:id="@+id/textColorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chage Text Color" />
+
 </LinearLayout>
