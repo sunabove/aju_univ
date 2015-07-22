@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class AutoCompleteActivity extends Activity {
@@ -18,6 +19,8 @@ public class AutoCompleteActivity extends Activity {
 	TextView messageTv;
 	Button okBtn;
 	CheckBox myCheckBox ; 
+	RadioButton femaleRadio ;
+	RadioButton maleRadio ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,24 +56,40 @@ public class AutoCompleteActivity extends Activity {
 		});
 		
 		this.myCheckBox = (CheckBox) findViewById( R.id.myCheckBox );
-		this.myCheckBox.setOnClickListener( new OnClickListener () {
-
+		this.myCheckBox.setOnClickListener( new OnClickListener () { 
 			@Override
 			public void onClick(View v) { 
 				//boolean isSelected = myCheckBox.isSelected();
-				boolean isChecked = myCheckBox.isChecked();
-				
+				boolean isChecked = myCheckBox.isChecked(); 
 				String msg = "";
 				if( isChecked ) {
 					msg = "당신은 내국인입니다.";
 				} else {
 					msg = "당신은 외국인입니다.";
-				}
-				
+				} 
 				messageTv.setText( msg );
-			}
-			
+			} 
 		});
+		
+		this.femaleRadio = (RadioButton) findViewById( R.id.radio_female );
+		this.maleRadio = (RadioButton) findViewById( R.id.radio_male );
+		
+		OnClickListener radioListener = new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				boolean isFemale = femaleRadio.isChecked();
+				String msg = "";
+				if( isFemale ) {
+					msg = "당신은 여성 입니다.";
+				} else {
+					msg = "당신은 남성 입니다.";
+				} 
+				messageTv.setText( msg );
+			} 
+		}; 
+		
+		this.femaleRadio.setOnClickListener( radioListener );
+		this.maleRadio.setOnClickListener( radioListener );
 
 	}
 
