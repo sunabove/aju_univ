@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -94,8 +96,25 @@ public class AutoCompleteActivity extends Activity {
 		this.maleRadio.setOnClickListener( radioListener );
 		
 		this.mySpinner = (Spinner) findViewById( R.id.mySpinner );
-		ArrayAdapter<String> daysAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, DAYS );
+		final ArrayAdapter<String> daysAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, DAYS );
 		this.mySpinner.setAdapter( daysAdapter );
+		
+		this.mySpinner.setOnItemSelectedListener( new OnItemSelectedListener() { 
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				String msg = ""; 
+				msg = daysAdapter.getItem(position);
+				messageTv.setText( msg ); 
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				String msg = ""; 
+				msg = "아무 것도 선택하지 않았습니다.";
+				messageTv.setText( msg ); 
+			} 
+		});
 
 	}
 
