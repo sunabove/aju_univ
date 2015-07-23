@@ -17,6 +17,7 @@ public class PhotoActivity extends Activity {
 
 	ImageView imageView;
 	Button takePhotoBtn;
+	Button savePhotoBtn;
 	TextView messageTv;
 
 	int takePhotoCount;
@@ -28,6 +29,7 @@ public class PhotoActivity extends Activity {
 		setContentView(R.layout.activity_photo);
 
 		this.takePhotoBtn = (Button) findViewById(R.id.photo_takePhoto);
+		this.savePhotoBtn = (Button) findViewById( R.id.photo_savePhoto );
 		this.messageTv = (TextView) findViewById(R.id.photo_message);
 		this.imageView = (ImageView) findViewById(R.id.photo_imageView);
 
@@ -35,8 +37,14 @@ public class PhotoActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				dispatchTakePictureIntent();
-			}
-
+			} 
+		});
+		
+		this.savePhotoBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onClickSavePhotoBtn();
+			} 
 		});
 	}
 
@@ -70,6 +78,36 @@ public class PhotoActivity extends Activity {
 
 		if (msg != null) {
 			messageTv.setText(msg);
+		}
+	}
+	
+	public void onClickSavePhotoBtn() {
+		Bitmap imageBitmap = this.imageBitmap;
+		String msg = null;
+		if( imageBitmap == null ) {
+			msg = "저장할 사진이 없습니다.";
+		} else if( imageBitmap != null ) {
+			File imageFile = null ; 
+			try {
+				imageFile = this.saveImageToFile( imageBitmap );
+			} catch (Exception e) {  
+				e.printStackTrace();
+			}
+			if( imageFile == null ) {
+				msg = "사진 파일을 저장하지 못하였습니다.";
+			} else if( imageFile != null ) {
+				msg = "사진 파일[%s]이 저장되었습니다.";
+				String imageFileName = "";
+				try {
+					imageFileName = imageFile.getCanonicalPath();
+				} catch (IOException e) { 
+				}
+				msg = String.format( msg, imageFileName );
+			}
+		}
+		
+		if( msg != null ) {
+			messageTv.setText( msg );
 		}
 	}
 
