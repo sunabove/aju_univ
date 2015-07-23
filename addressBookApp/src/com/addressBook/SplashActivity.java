@@ -1,16 +1,44 @@
 package com.addressBook;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+
+import android.app.*;
+import android.content.*;
+import android.os.*; 
+import android.view.*;
+import android.view.View.*;
+import android.widget.*; 
 
 public class SplashActivity extends Activity {
+	
+	ImageView logoIv ;
+	TextView appNameTv ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
+		
+		this.logoIv = (ImageView) findViewById( R.id.splash_logo );
+		this.appNameTv = (TextView) findViewById( R.id.splash_appName );
+		
+		this.logoIv.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				Intent intent = new Intent( SplashActivity.this, PersonListActivity.class );
+				startActivity( intent );
+			} 
+		});
+		
+		this.appNameTv.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				Intent intent = new Intent( SplashActivity.this, AboutActivity.class );
+				startActivity( intent );
+			} 
+		});
 	}
 
 	@Override
