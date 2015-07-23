@@ -9,20 +9,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.addressBook.SplashActivity" >
-
-    <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/address_book_logo" />
+    tools:context="com.addressBook.AboutActivity" >
 
     <TextView
-        android:id="@+id/splash_appName"
+        android:id="@+id/about_programName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="나의 주소록 V 1.0"
-        android:textSize="38sp" />
+        android:text="나의 주소록 V 1.0" />
+
+    <EditText
+        android:id="@+id/about_programInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:text="만든 사람: 홍길동" >
+
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>
