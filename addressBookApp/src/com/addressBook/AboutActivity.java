@@ -12,11 +12,28 @@ import android.view.View.*;
 import android.widget.*; 
 
 public class AboutActivity extends Activity {
+	
+	EditText programInfo ;
+	TextView programName ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
+		
+		this.programInfo = (EditText) findViewById( R.id.about_programInfo );
+		this.programName = (TextView) findViewById( R.id.about_programName );
+		
+		OnClickListener listener = new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				finish();
+			} 
+		};
+		
+		this.programInfo.setOnClickListener( listener );
+		this.programName.setOnClickListener( listener );
+		
 	}
 
 	@Override
