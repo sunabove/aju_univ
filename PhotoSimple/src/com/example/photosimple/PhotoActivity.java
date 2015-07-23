@@ -18,6 +18,8 @@ public class PhotoActivity extends Activity {
 	ImageView imageView ; 
 	Button	takePhotoBtn ;
 	TextView	messageTv ; 
+	
+	int takePhotoCount ;  
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +50,24 @@ public class PhotoActivity extends Activity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+		String msg = null ;
+		if( data == null ) {
+			msg = "넘어온 데이터가 없습니다."; 
+		} else  if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 	        Bundle extras = data.getExtras();
 	        Bitmap imageBitmap = (Bitmap) extras.get("data");
-	        imageView.setImageBitmap(imageBitmap);
+	        if( imageBitmap == null ) {
+	        	msg = "사진 데이터가 없습니다." ; 
+	        } else if( imageBitmap != null ) { 
+	        	imageView.setImageBitmap(imageBitmap);
+	        	takePhotoCount ++ ;
+	        	msg = "%d번째 사진을 성공적으로 찍었습니다.";
+	        	msg = String.format( msg, takePhotoCount );
+	        }
 	    }
+		
+		if( msg != null ) {
+			messageTv.setText( msg );
+		}
 	}
 }
