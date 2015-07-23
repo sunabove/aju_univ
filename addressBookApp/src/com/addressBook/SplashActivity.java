@@ -15,6 +15,7 @@ public class SplashActivity extends Activity {
 	
 	ImageView logoIv ;
 	TextView appNameTv ; 
+	ProgressBar progressBar ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class SplashActivity extends Activity {
 		
 		this.logoIv = (ImageView) findViewById( R.id.splash_logo );
 		this.appNameTv = (TextView) findViewById( R.id.splash_appName );
+		this.progressBar = (ProgressBar) findViewById( R.id.splash_progress );
 		
 		this.logoIv.setOnClickListener( new OnClickListener() { 
 			@Override
@@ -45,11 +47,17 @@ public class SplashActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		
-		Handler handler = new Handler();
+		final Handler handler = new Handler();
 		Runnable runnable = new Runnable() {
+			ProgressBar progressBar  = SplashActivity.this.progressBar ; 
 			public void run() {
-				Intent intent = new Intent( SplashActivity.this, PersonListActivity.class );
-				startActivity( intent );
+				if( progressBar.getProgress() < 100 ) {
+					progressBar.setProgress( progressBar.getProgress() + 10 );
+					handler.postDelayed( this, 400 );
+				} else { 
+					Intent intent = new Intent( SplashActivity.this, PersonListActivity.class );
+					startActivity( intent );
+				}
 			}
 		};
 		
