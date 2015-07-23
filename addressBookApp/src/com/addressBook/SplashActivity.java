@@ -40,6 +40,21 @@ public class SplashActivity extends Activity {
 			} 
 		});
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+		Handler handler = new Handler();
+		Runnable runnable = new Runnable() {
+			public void run() {
+				Intent intent = new Intent( SplashActivity.this, PersonListActivity.class );
+				startActivity( intent );
+			}
+		};
+		
+		handler.postDelayed(runnable, 2000);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
