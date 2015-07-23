@@ -27,7 +27,7 @@ public class PhotoActivity extends Activity {
 		setContentView(R.layout.activity_photo);
 		
 		this.takePhotoBtn = (Button) findViewById( R.id.photo_takePhoto );
-		this.messageTv = (TextView) findViewById( R.id.photo_takePhoto );
+		this.messageTv = (TextView) findViewById( R.id.photo_message );
 		this.imageView = (ImageView) findViewById( R.id.photo_imageView );
 		
 		this.takePhotoBtn.setOnClickListener( new OnClickListener() { 
