@@ -13,7 +13,13 @@ import android.widget.*;
 
 public class PersonCommonActivity extends Activity {
 
+	final Handler handler = new Handler(); 
+	
 	public PersonCommonActivity() { 
+	}
+	
+	public final void  handlerPost( Runnable runnable , long delayMilis ) { 
+		handler.postDelayed(runnable, delayMilis );
 	}
 
 }

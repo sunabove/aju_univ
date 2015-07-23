@@ -11,7 +11,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*; 
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends PersonCommonActivity {
 	
 	ImageView logoIv ;
 	TextView appNameTv ; 

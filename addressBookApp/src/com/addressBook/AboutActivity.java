@@ -11,7 +11,7 @@ import android.view.*;
 import android.view.View.*;
 import android.widget.*; 
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends PersonCommonActivity {
 	
 	EditText programInfo ;
 	TextView programName ; 
