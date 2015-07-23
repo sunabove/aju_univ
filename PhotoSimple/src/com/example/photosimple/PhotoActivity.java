@@ -66,11 +66,16 @@ public class PhotoActivity extends Activity {
 			Bundle extras = data.getExtras();
 			Bitmap imageBitmap = (Bitmap) extras.get("data");
 			if (imageBitmap == null) {
-				msg = "사진 데이터가 없습니다.";
+				msg = "사진 데이터가 없습니다. 사진을 먼저 찍어주세요.";
+				if( this.takePhotoCount > 1 ) {
+					msg = "이미 저장된 사진입니다. 다른 사진을 먼저 \\찍어주세요.";
+				}
 			} else if (imageBitmap != null) {
 				imageView.setImageBitmap(imageBitmap);
 				this.imageBitmap = imageBitmap ; 
 				takePhotoCount++;
+				
+				this.imageBitmap = null ; 
 				msg = "%d번째 사진을 성공적으로 찍었습니다.";
 				msg = String.format(msg, takePhotoCount);
 			}
