@@ -46,6 +46,7 @@ public class FirstActivity extends Activity {
 		Activity fromActivity = this;
 		Class toActivityClass = SecondActivity.class ; 
 		Intent intent = new Intent( fromActivity, toActivityClass );
+		
 		intent.putExtra( "firstNumber", firstNumber );
 		intent.putExtra( "secondNumber", secondNumber );
 		

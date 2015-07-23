@@ -71,6 +71,7 @@ public class SecondActivity extends Activity {
 		
 		int resultCode = 1; 
 		this.setResult(resultCode, intent);
+		
 		this.finish();
 	}
 
