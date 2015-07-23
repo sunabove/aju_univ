@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/list_mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,24 +11,27 @@
     tools:context="com.addressBook.PersonListActivity" >
 
     <LinearLayout
+        android:id="@+id/list_listLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:minHeight="400dp"
         android:orientation="vertical" >
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/list_listPersons"
             android:layout_width="match_parent"
             android:layout_height="fill_parent" >
         </ListView>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/list_menuLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center" >
 
         <Button
-            android:id="@+id/Button01"
+            android:id="@+id/list_addPerson"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +39,7 @@
             android:text="추가" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/list_editPerson"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +47,7 @@
             android:text="수정" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/list_deletePerson"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

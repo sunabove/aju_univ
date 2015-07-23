@@ -12,11 +12,39 @@ import android.view.View.*;
 import android.widget.*; 
 
 public class PersonListActivity extends PersonCommonActivity {
+	
+	Button addPersonBtn ;
+	Button editPersonBtn ;
+	Button deletePersonBtn ; 
+	
+	ListView listPersonLv ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_person_list);
+		
+		this.addPersonBtn = (Button) findViewById( R.id.list_addPerson );
+		this.editPersonBtn = (Button) findViewById( R.id.list_editPerson );
+		this.deletePersonBtn = (Button) findViewById( R.id.list_deletePerson );
+		
+		this.listPersonLv = (ListView) findViewById( R.id.list_listPersons ); 
+		
+		this.addPersonBtn.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				Intent intent = new Intent( PersonListActivity.this, PersonEditActivity.class );
+				startActivity( intent );
+			} 
+		} );
+		
+		this.editPersonBtn.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				Intent intent = new Intent( PersonListActivity.this, PersonEditActivity.class );
+				startActivity( intent );
+			} 
+		} );
 	}
 
 	@Override
