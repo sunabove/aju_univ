@@ -11,27 +11,9 @@
     tools:context="com.addressBook.PersonEditActivity" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/edit_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="저장" />
-
-        <Button
-            android:id="@+id/edit_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="취소" />
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
         android:gravity="center_horizontal"
         android:orientation="vertical" >
 
@@ -63,10 +45,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" >
-
-                    <requestFocus />
-                </EditText>
+                    android:inputType="textPersonName" />
             </TableRow>
 
             <TableRow
@@ -114,9 +93,7 @@
                             android:drawableLeft="@drawable/female"
                             android:text="여" />
                     </RadioGroup>
-
                 </LinearLayout>
-
             </TableRow>
 
             <TableRow
@@ -222,7 +199,6 @@
                     android:layout_height="wrap_content"
                     android:scaleType="fitCenter"
                     android:src="@drawable/person_photo" />
-
             </TableRow>
 
             <TableRow
@@ -251,8 +227,37 @@
                     android:ems="10"
                     android:inputType="textMultiLine" />
             </TableRow>
-
         </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/edit_save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/save"
+            android:text="저장" />
+
+        <Button
+            android:id="@+id/edit_edit_btn"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/edit"
+            android:text="수정" />
+
+        <Button
+            android:id="@+id/edit_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/cancel"
+            android:text="취소" />
+
     </LinearLayout>
 
 </LinearLayout>
