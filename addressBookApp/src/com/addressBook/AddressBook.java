@@ -30,6 +30,7 @@ public class AddressBook {
 		p = new Person(); 
 		p.id = id ++ ;
 		p.name = "Jhon" ;
+		p.phoneNumber = "011 2222 4444";
 		
 		persons.add( p );
 		
