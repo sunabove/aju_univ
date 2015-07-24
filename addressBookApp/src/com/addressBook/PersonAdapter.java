@@ -2,6 +2,7 @@ package com.addressBook;
 
 import java.util.List;
 
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import static com.addressBook.Person.Gender;
+import static com.addressBook.Person.Gender.*;
 
 public class PersonAdapter extends ArrayAdapter<Person> {
 
@@ -42,6 +45,8 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 		TextView personPhoneNoTv = (TextView) itemView.findViewById( R.id.person_item_phone_number );
 		
 		Person person = addressBook.persons.get( position );
+		
+		Gender gender = MALE ; 
 		
 		personChecked.setChecked( false );
 		personNameTv.setText( person.name );
