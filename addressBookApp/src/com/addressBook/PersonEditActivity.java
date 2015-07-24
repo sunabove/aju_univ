@@ -47,6 +47,7 @@ public class PersonEditActivity extends PersonCommonActivity {
 		this.personFemaleRd = (RadioButton) findViewById( R.id.edit_person_gender_female );
 		
 		this.personPhotoIv = (ImageView) findViewById(R.id.edit_person_photo );
+		this.personMemoEt = (EditText) findViewById( R.id.edit_person_memo );
 		
 		this.editBtn.setVisibility( View.GONE );
 		
@@ -72,21 +73,33 @@ public class PersonEditActivity extends PersonCommonActivity {
 	
 	public void savePerson() {
 		String name = this.personNameEt.getText().toString() ;
-		if( name == null || name.trim().length() < 1 ) {
-			Context context = this.getApplicationContext();
-			new AlertDialog.Builder(context)
-		    .setTitle("이름 입력")
-		    .setMessage("주소록을 추가하려면 이름을 입력하여야 합니다.")
-		    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {  
-		        }
-		     })
-		    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {  
-		        }
-		     })
-		    .setIcon(android.R.drawable.ic_dialog_alert)
-		    .show();
+		if( name == null || name.trim().length() < 1 ) { 	
+			
+			Activity activity = this; 
+			String title = "이름 입력" ;
+			String message = "이름을 입력하세요!";
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			// Set the dialog title
+			builder.setTitle( title ); 
+			builder.setMessage( message );
+
+			// Set the action buttons
+			builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int id) {  
+				}
+			});
+
+			// set the negative button
+			builder.setNegativeButton( "Cancel" , new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int id) {
+				}
+			});
+
+			AlertDialog dialog = builder.create();
+			dialog.show();
 			
 			return ; 
 		}
@@ -115,6 +128,10 @@ public class PersonEditActivity extends PersonCommonActivity {
 		
 		p.id = addressBook.persons.size() ; 
 		addressBook.persons.add( p );
+		
+		addressBook.personInserted = true ; 
+		
+		finish();
 		
 	}
 	

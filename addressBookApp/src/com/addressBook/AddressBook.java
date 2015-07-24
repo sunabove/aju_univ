@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class AddressBook { 
 	
+	boolean personInserted ; 
+	
 	static final String ADDRESS_BOOK_FILE_NAME = "c:/tmp/addressBook.txt" ;
 	ArrayList<Person>  persons ; 
 	
