@@ -41,7 +41,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/edit_person_ame"
+                    android:id="@+id/edit_person_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
