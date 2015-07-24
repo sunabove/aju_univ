@@ -26,12 +26,40 @@ public class PersonEditActivity extends PersonCommonActivity {
 		this.editBtn = (Button) findViewById( R.id.edit_edit_btn );
 		this.cancelBtn = (Button) findViewById( R.id.edit_cancel_btn );
 		
+		this.editBtn.setVisibility( View.GONE );
+		
+		this.saveBtn.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				savePerson();
+			} 
+		});
+		
 		this.cancelBtn.setOnClickListener( new OnClickListener() { 
 			@Override
 			public void onClick(View v) { 
-				finish();
+				cancelEdit();
 			} 
 		});
 	} 
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+	
+	public void savePerson() {
+		
+	}
+	
+	public void cancelEdit() {
+		finish();
+	}
+	
+	public void viewList() {
+		
+	}
+	
+	
 	
 }

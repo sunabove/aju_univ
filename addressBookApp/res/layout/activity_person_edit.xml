@@ -41,7 +41,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/edit_person_ame"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -79,7 +79,7 @@
                         android:orientation="horizontal" >
 
                         <RadioButton
-                            android:id="@+id/radio0"
+                            android:id="@+id/edit_person_gender_male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
@@ -87,7 +87,7 @@
                             android:text="남" />
 
                         <RadioButton
-                            android:id="@+id/radio1"
+                            android:id="@+id/edit_person_gender_female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableLeft="@drawable/female"
@@ -115,7 +115,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/EditText01"
+                    android:id="@+id/edit_person_birth_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -141,7 +141,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/EditText02"
+                    android:id="@+id/edit_person_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -167,7 +167,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/EditText03"
+                    android:id="@+id/edit_person_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -194,7 +194,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/edit_person_photo"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="fitCenter"
@@ -221,7 +221,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/edit_person_memo"
                     android:layout_width="fill_parent"
                     android:layout_height="80dp"
                     android:ems="10"
