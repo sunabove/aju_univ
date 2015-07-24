@@ -14,14 +14,12 @@ import android.widget.TextView;
 
 public class MonthAdapter extends ArrayAdapter<String> {
 
-	Context context; 
 	LayoutInflater layoutInflater;
 	String[] months;
 
 	public MonthAdapter(Context context, String[] objects) {
 		super(context, R.layout.month_item_view, objects);
 
-		this.context = context;
 		this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.months = objects;
