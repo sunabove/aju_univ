@@ -6,7 +6,9 @@ import java.util.*;
 
 import android.app.*;
 import android.content.*;
+import android.graphics.Bitmap;
 import android.os.*; 
+import android.provider.MediaStore;
 import android.text.format.DateFormat;
 import android.view.*;
 import android.view.View.*;
@@ -27,6 +29,7 @@ public class PersonEditActivity extends PersonCommonActivity {
 	EditText personMemoEt ; 
 	
 	ImageView personPhotoIv ; 
+	String imageFileName ; 
 	
 
 	@Override
@@ -64,15 +67,26 @@ public class PersonEditActivity extends PersonCommonActivity {
 				cancelEdit();
 			} 
 		});
+		
+		this.personPhotoIv.setOnClickListener( new OnClickListener() { 
+			@Override
+			public void onClick(View v) { 
+				dispatchTakePictureIntent();
+			} 
+		});
 	} 
 	
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		this.imageFileName = null ; 
 	}
 	
 	public void savePerson() {
+		String imageFileName = this.imageFileName ; 
 		String name = this.personNameEt.getText().toString() ;
+		
 		if( name == null || name.trim().length() < 1 ) { 	
 			
 			Activity activity = this; 
@@ -123,6 +137,7 @@ public class PersonEditActivity extends PersonCommonActivity {
 		p.phoneNumber = phoneNumber ;
 		p.address = address ; 
 		p.memo = memo ; 
+		p.imageFileName = imageFileName ; 
 		
 		AddressBook addressBook = AddressBook.getAddressBook();
 		
@@ -141,25 +156,63 @@ public class PersonEditActivity extends PersonCommonActivity {
 	}
 	
 	public void viewList() { 
+	} 
+	
+	static final int REQUEST_IMAGE_CAPTURE = 1; 
+	
+	private void dispatchTakePictureIntent() {
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+			startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+		}
 	}
 	
-	public void showMessageDialog( String msg ) {
-		Context context = this.getApplicationContext();
-		new AlertDialog.Builder(context)
-	    .setTitle("Delete entry")
-	    .setMessage("Are you sure you want to delete this entry?")
-	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete
-	        }
-	     })
-	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // do nothing
-	        }
-	     })
-	    .setIcon(android.R.drawable.ic_dialog_alert)
-	     .show();
-	}  
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		String msg = null;
+		ImageView imageView = this.personPhotoIv ; 
+		
+		if (data == null) {
+			msg = "넘어온 데이터가 없습니다.";
+		} else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+			Bundle extras = data.getExtras();
+			Bitmap imageBitmap = (Bitmap) extras.get("data");
+			if (imageBitmap == null) {
+				msg = "사진 데이터가 없습니다. 사진을 먼저 찍어주세요."; 
+			} else if (imageBitmap != null) {
+				File savedImageFile = null;
+				try {
+					savedImageFile = this.saveImageToFile( imageBitmap );
+				} catch (IOException e) { 
+					savedImageFile = null ; 
+				}
+				
+				if( savedImageFile == null ) {
+					// show error message
+				} else if( savedImageFile != null ) {
+					imageView.setImageBitmap(imageBitmap);
+					try {
+						this.imageFileName = savedImageFile.getCanonicalPath() ;
+					} catch (IOException e) { 
+					} 
+				}
+			}
+		} 
+	}
+	
+	private File saveImageToFile(Bitmap imageBitmap) throws IOException {
+		// Create an image file name
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		String imageFileName = "AJU_UNIV_" + timeStamp + ".png";
+		File storageDir = Environment.getExternalStoragePublicDirectory( Environment.DIRECTORY_PICTURES) ;
+		File imageFile = new File(storageDir, imageFileName);
+		FileOutputStream out = new FileOutputStream( imageFile );
+		
+		imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, out ); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
+		out.flush();
+		out.close(); // do not forget to close the stream
+
+		return imageFile;
+	}
 	
 }
