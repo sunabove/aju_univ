@@ -4,26 +4,37 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook { 
 	
 	static final String ADDRESS_BOOK_FILE_NAME = "c:/tmp/addressBook.txt" ;
-	Person [] persons ; 
+	ArrayList<Person>  persons ; 
 	
-	public AddressBook() {
-		persons = new Person[ 10 ] ; 
+	static AddressBook ADDRESS_BOOK = null ;
+	
+	private AddressBook() {
+		this.persons = new ArrayList<Person>();
 	} 
+	
+	public static AddressBook getAddressBook() {
+		if( ADDRESS_BOOK == null ) {
+			ADDRESS_BOOK = new AddressBook();
+		}
+		
+		return ADDRESS_BOOK ; 
+	}
 	
 	public void readAllPersonsFromFile() {
 		String msg = null ; 
 		try {
 			Scanner scanner = new Scanner( new File( ADDRESS_BOOK_FILE_NAME ) );
-			Person [] persons = this.persons;
+			ArrayList<Person>  persons = this.persons;
 			Person p ; 
 			boolean endOfFile = false ; 
 			int readPersonCount = 0 ; 
-			for( int i = 0, iLen = persons.length ; i < iLen  ; i ++ ) {
+			for(   ; ! endOfFile ;  ) {
 				p = null ; 
 				if( scanner.hasNext() ) {
 					p = new Person();
@@ -47,13 +58,9 @@ public class AddressBook {
 					endOfFile = true;
 				}
 				if( p != null ) {
-					persons[ i ] = p; 
+					persons.add( p );
 					readPersonCount ++  ; 
-				}
-				if( endOfFile ) {
-					i = iLen ;
-					break;
-				}
+				} 
 			} 
 			scanner.close();
 			
@@ -82,11 +89,11 @@ public class AddressBook {
 			if( ! file.exists() ) {
 				file.createNewFile();
 			}  
-			Person [] persons = this.persons;
+			ArrayList<Person> persons = this.persons;
 			Person p ;
 			String newLine = "\r\n"; 
-			for( int i = 0, iLen = persons.length ; i < iLen ; i ++ ) {
-				p = persons[i];
+			for( int i = 0, iLen = persons.size() ; i < iLen ; i ++ ) {
+				p = persons.get(i);
 				if( p != null ) {
 					fos.write( ( "" + p.id + newLine ).getBytes() );
 					fos.write( ( p.name + newLine ).getBytes() );
