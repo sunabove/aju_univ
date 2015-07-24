@@ -45,7 +45,10 @@ public class MonthAdapter extends ArrayAdapter<String> {
 		int seasonIndex = position/4;
 		imageView.setImageResource( seasonIconRscIds[ seasonIndex ] );
 
-		radioButton.setChecked(position == 1);
+		if( position == 1 ) { 
+			radioButton.setChecked( true );
+		}
+		
 		if (position < months.length) {
 			textView.setText(months[position]);
 		}
