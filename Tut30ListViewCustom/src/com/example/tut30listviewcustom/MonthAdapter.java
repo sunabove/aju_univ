@@ -14,17 +14,15 @@ import android.widget.TextView;
 
 public class MonthAdapter extends ArrayAdapter<String> {
 
-	Context context;
-	int resource;
-	LayoutInflater mInflater;
+	Context context; 
+	LayoutInflater layoutInflater;
 	String[] months;
 
 	public MonthAdapter(Context context, String[] objects) {
 		super(context, R.layout.month_item_view, objects);
 
 		this.context = context;
-		this.resource = R.layout.month_item_view;
-		this.mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		this.months = objects;
 	}
@@ -34,8 +32,8 @@ public class MonthAdapter extends ArrayAdapter<String> {
 
 		View itemView;
 
-		if (convertView == null) {
-			itemView = mInflater.inflate(resource, parent, false);
+		if (convertView == null) { 
+			itemView = layoutInflater.inflate( R.layout.month_item_view, parent, false);
 		} else {
 			itemView = convertView;
 		}
