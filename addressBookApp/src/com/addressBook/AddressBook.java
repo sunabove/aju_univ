@@ -22,7 +22,34 @@ public class AddressBook {
 	} 
 	
 	private void addMockUpData() {
+		ArrayList<Person> persons = this.persons;
 		
+		int id = 1 ; 
+		Person p;
+		
+		p = new Person(); 
+		p.id = id ++ ;
+		p.name = "Jhon" ;
+		
+		persons.add( p );
+		
+		p = new Person(); 
+		p.id = id ++ ;
+		p.name = "Doe" ;
+		
+		persons.add( p );
+		
+		p = new Person(); 
+		p.id = id ++ ;
+		p.name = "Jame" ;
+		
+		persons.add( p );
+		
+		p = new Person(); 
+		p.id = id ++ ;
+		p.name = "Kang Jung Ho" ;
+		
+		persons.add( p );
 	}
 	
 	public static AddressBook getAddressBook() {

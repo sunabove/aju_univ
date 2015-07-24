@@ -5,9 +5,9 @@ public class Person extends Object {
 	int id;
 	String name;
 	String phoneNumber;
-	String address ; 
+	String address ;  
 	
-	public Person() { 
+	public Person() {  
 	}
 	
 	@Override
