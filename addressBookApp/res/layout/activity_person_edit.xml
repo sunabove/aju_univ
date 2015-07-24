@@ -52,7 +52,7 @@
                     android:src="@drawable/name" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/person_item_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="이름"

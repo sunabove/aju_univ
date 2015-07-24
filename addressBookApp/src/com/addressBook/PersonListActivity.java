@@ -18,17 +18,24 @@ public class PersonListActivity extends PersonCommonActivity {
 	Button deletePersonBtn ; 
 	
 	ListView listPersonLv ; 
+	
+	AddressBook addressBook ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_person_list);
 		
+		this.addressBook = AddressBook.getAddressBook(); 
+		
 		this.addPersonBtn = (Button) findViewById( R.id.list_addPerson );
 		this.editPersonBtn = (Button) findViewById( R.id.list_editPerson );
 		this.deletePersonBtn = (Button) findViewById( R.id.list_deletePerson );
 		
 		this.listPersonLv = (ListView) findViewById( R.id.list_listPersons ); 
+		
+		PersonAdapter personAdapter = new PersonAdapter( this , addressBook );
+		this.listPersonLv.setAdapter( personAdapter );
 		
 		this.addPersonBtn.setOnClickListener( new OnClickListener() { 
 			@Override

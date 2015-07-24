@@ -36,18 +36,21 @@ public class AddressBook {
 		p = new Person(); 
 		p.id = id ++ ;
 		p.name = "Doe" ;
+		p.phoneNumber = "010 2222 4444";
 		
 		persons.add( p );
 		
 		p = new Person(); 
 		p.id = id ++ ;
 		p.name = "Jame" ;
+		p.phoneNumber = "010 3333 4444";
 		
 		persons.add( p );
 		
 		p = new Person(); 
 		p.id = id ++ ;
 		p.name = "Kang Jung Ho" ;
+		p.phoneNumber = "010 2342 7684";
 		
 		persons.add( p );
 	}
