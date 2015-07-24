@@ -16,13 +16,15 @@ public class MonthAdapter extends ArrayAdapter<String> {
 
 	LayoutInflater layoutInflater;
 	String[] months;
+	
+	int [] seasonIconRscIds = { R.drawable.winter, R.drawable.spring, R.drawable.summer, R.drawable.fall }  ;
 
 	public MonthAdapter(Context context, String[] objects) {
 		super(context, R.layout.month_item_view, objects);
 
 		this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		this.months = objects;
+		this.months = objects; 
 	}
 
 	@Override
@@ -39,6 +41,9 @@ public class MonthAdapter extends ArrayAdapter<String> {
 		ImageView imageView = (ImageView) itemView.findViewById(R.id.month_item_icon);
 		RadioButton radioButton = (RadioButton) itemView.findViewById(R.id.month_item_checked);
 		TextView textView = (TextView) itemView.findViewById(R.id.month_item_text);
+		
+		int seasonIndex = position/4;
+		imageView.setImageResource( seasonIconRscIds[ seasonIndex ] );
 
 		radioButton.setChecked(position == 1);
 		if (position < months.length) {
