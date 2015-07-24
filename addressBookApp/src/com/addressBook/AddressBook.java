@@ -4,24 +4,43 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+
+import android.os.Environment;
 
 public class AddressBook { 
 	
 	boolean personInserted ; 
 	
-	static final String ADDRESS_BOOK_FILE_NAME = "c:/tmp/addressBook.txt" ;
+	File addressBookFile ; 
+	
 	ArrayList<Person>  persons ; 
 	
 	static AddressBook ADDRESS_BOOK = null ;
 	
 	private AddressBook() {
+		this.addressBookFile = this.getAddressBookFile() ; 
+		
 		this.persons = new ArrayList<Person>();
 		
 		//add mock up data
-		addMockUpData();
+		//addMockUpData();
+		
+		this.readAllPersonsFromFile();
 	} 
+	
+	private File getAddressBookFile() { 
+		if( this.addressBookFile == null ) { 
+			String fileName = "addressBook.txt";
+			File storageDir = Environment.getExternalStoragePublicDirectory( Environment.DIRECTORY_PICTURES) ;
+			this.addressBookFile = new File(storageDir, fileName); 
+		}
+		
+		return this.addressBookFile  ; 
+	}
 	
 	private void addMockUpData() {
 		ArrayList<Person> persons = this.persons;
@@ -69,7 +88,11 @@ public class AddressBook {
 	public void readAllPersonsFromFile() {
 		String msg = null ; 
 		try {
-			Scanner scanner = new Scanner( new File( ADDRESS_BOOK_FILE_NAME ) );
+			File file = this.addressBookFile ;
+			if( file == null || ! file.exists() ) {
+				return ;
+			}
+			Scanner scanner = new Scanner( file );
 			ArrayList<Person>  persons = this.persons;
 			Person p ; 
 			boolean endOfFile = false ; 
@@ -124,7 +147,7 @@ public class AddressBook {
 		FileOutputStream fos = null;
 		File file; 
 		try { 
-			file = new File( ADDRESS_BOOK_FILE_NAME );
+			file = this.addressBookFile ;
 			fos = new FileOutputStream(file);  
 			if( ! file.exists() ) {
 				file.createNewFile();

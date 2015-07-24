@@ -131,8 +131,9 @@ public class PersonEditActivity extends PersonCommonActivity {
 		
 		addressBook.personInserted = true ; 
 		
-		finish();
+		addressBook.saveAllPersonsOnFile();
 		
+		finish(); 
 	}
 	
 	public void cancelEdit() {

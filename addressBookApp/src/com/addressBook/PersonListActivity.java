@@ -20,6 +20,7 @@ public class PersonListActivity extends PersonCommonActivity {
 	ListView listPersonLv ; 
 	
 	AddressBook addressBook ;  
+	PersonAdapter personAdapter ; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class PersonListActivity extends PersonCommonActivity {
 		
 		this.listPersonLv = (ListView) findViewById( R.id.list_listPersons ); 
 		
-		PersonAdapter personAdapter = new PersonAdapter( this , addressBook );
+		this.personAdapter = new PersonAdapter( this , addressBook );
 		this.listPersonLv.setAdapter( personAdapter );
 		
 		this.addPersonBtn.setOnClickListener( new OnClickListener() { 
@@ -62,8 +63,13 @@ public class PersonListActivity extends PersonCommonActivity {
 		
 		if( addressBook.personInserted ) {
 			addressBook.personInserted = false ; 
-			PersonAdapter personAdapter = new PersonAdapter( this , addressBook );
-			listPersonLv.setAdapter( personAdapter );
+			boolean useDataSetChanged = true ;
+			if( useDataSetChanged ) {
+				this.personAdapter.notifyDataSetChanged(); 
+			} else if( ! useDataSetChanged ) { 
+				this.personAdapter = new PersonAdapter( this , addressBook );
+				listPersonLv.setAdapter( personAdapter );
+			}
 		}
 	}
 }
