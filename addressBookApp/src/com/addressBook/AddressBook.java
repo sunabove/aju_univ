@@ -16,7 +16,14 @@ public class AddressBook {
 	
 	private AddressBook() {
 		this.persons = new ArrayList<Person>();
+		
+		//add mock up data
+		addMockUpData();
 	} 
+	
+	private void addMockUpData() {
+		
+	}
 	
 	public static AddressBook getAddressBook() {
 		if( ADDRESS_BOOK == null ) {
