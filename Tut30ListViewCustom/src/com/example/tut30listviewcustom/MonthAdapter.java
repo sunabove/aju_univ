@@ -29,6 +29,7 @@ public class MonthAdapter extends ArrayAdapter<String> {
 		this.months = objects;
 	}
 
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		View itemView;
