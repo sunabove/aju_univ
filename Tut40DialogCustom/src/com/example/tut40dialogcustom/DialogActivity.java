@@ -102,6 +102,7 @@ public class DialogActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		// Set the dialog title
 		builder.setTitle(title); 
+		//builder.setMessage(message);
 		builder.setIcon( R.drawable.message_icon ); 
 		
 		int currSelectedIndex = -1 ; 
