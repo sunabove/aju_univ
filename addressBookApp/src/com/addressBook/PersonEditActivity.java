@@ -291,5 +291,27 @@ public class PersonEditActivity extends PersonCommonActivity {
 			this.messageTv.setText(msg);
 		}
 	}
+	
+	@Override
+	public void onBackPressed() { 
+		// super.onBackPressed();
+
+		String title = "주소록 추가" ;
+		String message = "편집중인 데이터가 있습니다. 정말로 취소하시겠습니까?" ; 
+		
+		Runnable okRunnable = new Runnable() {
+			public  void run() {
+				PersonEditActivity.super.onBackPressed();
+			}
+		}; 
+		
+		Runnable cancelRunnable = new Runnable() {
+			public void run() {
+				// do nothing...
+			}
+		};
+		
+		this.showNormalDialog(title, message, okRunnable, cancelRunnable);
+	}
 
 }
