@@ -16,7 +16,7 @@ public class SplashActivity extends PersonCommonActivity {
 	ImageView logoIv;
 	TextView appNameTv;
 	ProgressBar progressBar;
-	Runnable nextActivityRunnable;
+	boolean activityStarted;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +30,18 @@ public class SplashActivity extends PersonCommonActivity {
 		this.logoIv.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (nextActivityRunnable == null) {
-					Intent intent = new Intent(SplashActivity.this, PersonListActivity.class);
-					startActivity(intent);
-				}
+				activityStarted = true;
+				Intent intent = new Intent(SplashActivity.this, PersonListActivity.class);
+				startActivity(intent);
 			}
 		});
 
 		this.appNameTv.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (nextActivityRunnable == null) {
-					Intent intent = new Intent(SplashActivity.this, AboutActivity.class);
-					startActivity(intent);
-				}
+				activityStarted = true;
+				Intent intent = new Intent(SplashActivity.this, AboutActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
@@ -52,16 +50,22 @@ public class SplashActivity extends PersonCommonActivity {
 	public void onResume() {
 		super.onResume();
 
-		if (this.nextActivityRunnable == null) { 
+		progressBar.setProgress(0);
+		
+		if (!activityStarted) {
+
 			final Handler handler = new Handler();
-			this.nextActivityRunnable = new Runnable() {
+			Runnable nextActivityRunnable = new Runnable() {
 				ProgressBar progressBar = SplashActivity.this.progressBar;
 
 				public void run() {
-					if (progressBar.getProgress() < 100) {
+					if (activityStarted) {
+						progressBar.setProgress(100);
+					} else if (progressBar.getProgress() < 100) {
 						progressBar.setProgress(progressBar.getProgress() + 10);
 						handler.postDelayed(this, 400);
-					} else {
+					} else if (!activityStarted) {
+						activityStarted = true;
 						Intent intent = new Intent(SplashActivity.this, PersonListActivity.class);
 						startActivity(intent);
 					}

@@ -3,7 +3,7 @@
     android:id="@+id/list_mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top|center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,23 +13,31 @@
 
     <ImageView
         android:id="@+id/splash_logo"
+        android:layout_width="339dp"
+        android:layout_height="263dp"
+        android:layout_weight="0.18"
+        android:src="@drawable/address_book_logo" />
+
+    <TextView
+        android:id="@+id/splash_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/address_book_logo" />
+        android:layout_marginTop="10dp"
+        android:text="나의 주소록 V 1.0"
+        android:textSize="38sp" />
 
     <ProgressBar
         android:id="@+id/splash_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:id="@+id/splash_appName"
+        android:id="@+id/edit_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="나의 주소록 V 1.0"
-        android:textSize="38sp" />
+        android:layout_weight="0.04"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

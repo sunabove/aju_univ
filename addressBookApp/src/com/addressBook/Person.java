@@ -24,9 +24,7 @@ public class Person extends Object {
 	@Override
 	public String toString() {
 		String msg = "id = %d, name = %s" ; 
-		msg = String.format( msg, id, name );
-		
-		//msg = "id " + id + "name = " + name ; 
+		msg = String.format( msg, id, name ); 
 		
 		return msg;
 	}

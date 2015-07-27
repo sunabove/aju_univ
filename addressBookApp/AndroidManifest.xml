@@ -7,9 +7,13 @@
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="19" />
-    
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" /> 
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -28,19 +32,28 @@
         </activity>
         <activity
             android:name=".PersonListActivity"
-            android:label="@string/title_activity_person_list" >
+            android:label="@string/title_activity_person_list"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".PersonEditActivity"
-            android:label="@string/title_activity_person_editi" >
+            android:label="@string/title_activity_person_editi"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".PersonViewActivity"
-            android:label="@string/title_activity_person_view" >
+            android:label="@string/title_activity_person_view"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".ViewPhotoActivity"
+            android:label="@string/title_activity_view_photo"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
     </application>
 

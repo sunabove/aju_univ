@@ -40,6 +40,13 @@ public class PhotoActivity extends Activity {
 			} 
 		});
 		
+		this.imageView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dispatchTakePictureIntent();
+			} 
+		});
+		
 		this.savePhotoBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -9,17 +9,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.addressBook.Person.Gender;
+
 import android.os.Environment;
 
 public class AddressBook { 
 	
-	boolean personInserted ; 
+	public static final SimpleDateFormat BIRTH_DATE_FORMAT =new SimpleDateFormat("yyyy-MM-DD"); 
+	private static AddressBook ADDRESS_BOOK = null ;
 	
 	File addressBookFile ; 
 	
 	ArrayList<Person>  persons ; 
 	
-	static AddressBook ADDRESS_BOOK = null ;
+	boolean personInserted ;  
+	Person personSelected ;
 	
 	private AddressBook() {
 		this.addressBookFile = this.getAddressBookFile() ; 
@@ -99,27 +103,32 @@ public class AddressBook {
 			int readPersonCount = 0 ; 
 			for(   ; ! endOfFile ;  ) {
 				p = null ; 
-				if( scanner.hasNext() ) {
-					p = new Person();
-					p.id = Integer.parseInt( scanner.nextLine() );
-					if( scanner.hasNext() ) {
-						p.name = scanner.nextLine();
-						if( scanner.hasNext() ) {
-							p.phoneNumber = scanner.nextLine();
-							if( scanner.hasNext() ) {
-								p.address = scanner.nextLine();
-							} else {
-								endOfFile = true;
-							}
-						} else {
-							endOfFile = true;
+				p = new Person(); 
+				try {  
+					p.id = Integer.parseInt( scanner.nextLine().trim() ) ;
+					p.name = scanner.nextLine().trim();
+					int gender = Integer.parseInt( scanner.nextLine().trim() );
+					p.gender = gender == 0 ? Person.Gender.MALE : Person.Gender.FEMALE ; 
+					Date birthDate = null;
+					try {
+						String birthDateStr = scanner.nextLine().trim(); 
+						if( birthDateStr != null && birthDateStr.length() > 0 ) {
+							birthDate = BIRTH_DATE_FORMAT.parse( birthDateStr );
 						}
-					} else {
-						endOfFile = true;
+					} catch (Exception ee ) { 
+						ee.printStackTrace();
 					}
-				} else {
-					endOfFile = true;
+					p.birthDate = birthDate ;
+					p.phoneNumber = scanner.nextLine().trim();
+					p.address = scanner.nextLine().trim();
+					p.imageFileName = scanner.nextLine().trim();
+					p.memo = scanner.nextLine().trim();
+				} catch ( Exception e ) {
+					e.printStackTrace();
+					p = null;
+					endOfFile = true ; 
 				}
+				 
 				if( p != null ) {
 					persons.add( p );
 					readPersonCount ++  ; 
@@ -158,10 +167,37 @@ public class AddressBook {
 			for( int i = 0, iLen = persons.size() ; i < iLen ; i ++ ) {
 				p = persons.get(i);
 				if( p != null ) {
+					// ID
 					fos.write( ( "" + p.id + newLine ).getBytes() );
+					// NAME 
 					fos.write( ( p.name + newLine ).getBytes() );
+					
+					// GENDER
+					int gender = p.gender == Gender.MALE ? 0 : 1 ; 
+					fos.write( ( "" + gender + newLine).getBytes() );
+					
+					// BIRTH DATE
+					String birthDataStr = "";
+					if( p.birthDate != null ) { 
+						birthDataStr = BIRTH_DATE_FORMAT.format( p.birthDate );
+					}
+					fos.write( ( birthDataStr + newLine).getBytes() ); 
+					
+					// PHONE NUMBER
 					fos.write( ( p.phoneNumber + newLine ).getBytes() );
+					
+					// ADDRESS 
 					fos.write( ( p.address + newLine ).getBytes() ); 
+					
+					// IMAGE FILE NAME
+					String imageFileName = p.imageFileName ; 
+					imageFileName = imageFileName == null ? "" : imageFileName.trim() ; 
+					fos.write( (imageFileName + newLine).getBytes() );
+					
+					// MEMO
+					String memo = p.memo ;
+					memo = memo == null ? "" : memo.trim();
+					fos.write( (memo + newLine).getBytes() ); 
 				}
 			} 
 			fos.flush();

@@ -10,6 +10,8 @@ import android.os.*;
 import android.view.*;
 import android.view.View.*;
 import android.widget.*; 
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class PersonListActivity extends PersonCommonActivity {
 	
@@ -35,12 +37,13 @@ public class PersonListActivity extends PersonCommonActivity {
 		
 		this.listPersonLv = (ListView) findViewById( R.id.list_listPersons ); 
 		
-		this.personAdapter = new PersonAdapter( this , addressBook );
+		this.personAdapter = new PersonAdapter( this , addressBook , this );
 		this.listPersonLv.setAdapter( personAdapter );
 		
 		this.addPersonBtn.setOnClickListener( new OnClickListener() { 
 			@Override
 			public void onClick(View v) { 
+				addressBook.personSelected = null ; 
 				Intent intent = new Intent( PersonListActivity.this, PersonEditActivity.class );
 				startActivity( intent );
 			} 
@@ -53,8 +56,17 @@ public class PersonListActivity extends PersonCommonActivity {
 				startActivity( intent );
 			} 
 		} );
+		
+		this.listPersonLv.setOnItemClickListener( new OnItemClickListener() { 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				onItemClickListPerson( position ); 
+			}
+			
+		}); 
 	} 
 	
+	@Override
 	public void onResume() {
 		super.onResume();
 		
@@ -67,8 +79,22 @@ public class PersonListActivity extends PersonCommonActivity {
 			if( useDataSetChanged ) {
 				this.personAdapter.notifyDataSetChanged(); 
 			} else if( ! useDataSetChanged ) { 
-				this.personAdapter = new PersonAdapter( this , addressBook );
+				this.personAdapter = new PersonAdapter( this , addressBook , this );
 				listPersonLv.setAdapter( personAdapter );
+			}
+		}
+	}
+	
+	public void onItemClickListPerson( int position ) {
+		AddressBook addressBook = this.addressBook;
+		ArrayList<Person> persons = addressBook.persons; 
+		Person person = null ; 
+		if( position < persons.size() ) {
+			person = persons.get( position );
+			if( person != null ) { 
+				addressBook.personSelected = person ;
+				Intent intent = new Intent( this, PersonViewActivity.class );
+				this.startActivity( intent );
 			}
 		}
 	}
