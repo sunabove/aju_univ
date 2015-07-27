@@ -2,7 +2,7 @@ package com.addressBook;
 
 import java.io.*;
 import java.text.*;
-import java.util.*;
+import java.util.*; 
 
 import android.app.*;
 import android.content.*;
@@ -200,8 +200,43 @@ public class PersonEditActivity extends PersonCommonActivity {
 		addressBook.personInserted = true ;
 
 		addressBook.saveAllPersonsOnFile();
+		
+		// show message dialog
+		
+		final Activity activity = this;
+		String title = "저장 완료";
+		String msg = "주소록이 저장되었습니다.";
+		
+		final AlertDialog [] dialogs = { null };
 
-		finish();
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		// Set the dialog title
+		builder.setTitle(title);
+		builder.setIcon(R.drawable.message_icon);
+
+		// Dialog View Customizing
+		LayoutInflater inflater = activity.getLayoutInflater();
+		View dialogView = inflater.inflate(R.layout.dialog_my_custom, null);
+		builder.setView(dialogView);
+
+		EditText editText = (EditText) dialogView.findViewById(R.id.my_custom_edit);
+		editText.setText( msg );
+		Button button = (Button) dialogView.findViewById(R.id.my_custom_btn);
+		button.setText("확인");
+
+		button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if( dialogs[0] != null ) { 
+					dialogs[0].hide();
+					activity.finish();
+				}
+			}
+		});
+
+		AlertDialog dialog = builder.create();
+		dialogs[0] = dialog;
+		dialog.show(); 
 	}
 
 	public void cancelEdit() {
