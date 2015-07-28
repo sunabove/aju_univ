@@ -39,6 +39,8 @@ public class MyDbActivity extends Activity {
 		ListView listView = this.listView ; 
 		FeedReaderDbHelper dbHelper = this.mDbHelper ; 
 		
+		dbHelper.insertTestRecords();
+		
 		Cursor cursor = dbHelper.getCursor();
 		
 		this.showTableCursor(listView, cursor);
