@@ -74,6 +74,19 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 		return newRowId; 
 	} 
 	
+	public int deleteRecord( int rowId ) {
+		// Gets the data repository in write mode
+		SQLiteDatabase db = this.getWritableDatabase();
+		// Define 'where' part of query.
+		String selection = FeedEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+		// Specify arguments in placeholder order.
+		String[] selectionArgs = { String.valueOf(rowId) };
+		// Issue SQL statement.
+		int rowCount = db.delete(FeedEntry.TABLE_NAME, selection, selectionArgs);
+		
+		return rowCount ; 
+	}
+	
 	public Cursor getCursor() {
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -106,6 +119,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 		return c ; 
 	}
 	
+	// singleton static function
 	static FeedReaderDbHelper DB_HELPER = null ; 
 	
 	public static FeedReaderDbHelper getFeedReaderDbHelper(Context context) {
