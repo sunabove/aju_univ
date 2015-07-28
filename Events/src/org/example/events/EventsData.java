@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class EventsData extends SQLiteOpenHelper {
    private static final String DATABASE_NAME = "events.db";
-   private static final int DATABASE_VERSION = 1;
+   private static final int DATABASE_VERSION = 6;
 
    /** Create a helper object for the Events database */
    public EventsData(Context ctx) { 
@@ -21,7 +21,9 @@ public class EventsData extends SQLiteOpenHelper {
    public void onCreate(SQLiteDatabase db) { 
       db.execSQL("CREATE TABLE " + TABLE_NAME + " (" + _ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TIME
-            + " INTEGER," + TITLE + " TEXT NOT NULL);");
+            + " INTEGER," + TITLE + " TEXT );");
+      
+      //+ " INTEGER," + TITLE + " TEXT NOT NULL);");
    }
 
    @Override
