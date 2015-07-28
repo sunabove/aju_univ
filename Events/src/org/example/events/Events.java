@@ -65,6 +65,7 @@ public class Events extends Activity {
 
 	private void showEvents(Cursor cursor) {
 		// Set up data binding
+		int[] TO = { R.id.rowid, R.id.time, R.id.title, };
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.item, cursor, FROM, TO);
 		
 		ListView listView = (ListView) findViewById( R.id.myListView );
