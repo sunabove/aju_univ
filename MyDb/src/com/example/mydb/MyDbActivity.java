@@ -46,7 +46,13 @@ public class MyDbActivity extends Activity {
 		this.showTableCursor(listView, cursor);
 	} 
 	
-	public void showTableCursor( ListView listView , Cursor cursor ) {
+	public void showTableCursor( ListView listView , Cursor cursor ) { 
+		MyCursorAdapter adapter = new MyCursorAdapter( this, cursor );
+		
+		listView.setAdapter( adapter );
+	}
+	
+	public void showTableCursorBySimpleCursorAdapter( ListView listView , Cursor cursor ) {
 		String[] from = {
 			    FeedEntry._ID,
 			    FeedEntry.COLUMN_NAME_TITLE,
