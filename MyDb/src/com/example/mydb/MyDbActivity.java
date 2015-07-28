@@ -40,6 +40,7 @@ public class MyDbActivity extends Activity {
 		FeedReaderDbHelper dbHelper = this.mDbHelper ; 
 		
 		Cursor cursor = dbHelper.getCursor();
+		
 		this.showTableCursor(listView, cursor);
 	} 
 	
