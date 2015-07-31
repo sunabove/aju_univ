@@ -12,7 +12,7 @@ public class ChatClient extends ChatObject {
 	String serverName = "192.168.0.12"; // ip address of computer to connect //
 	int port = 1000;
 	
-	String userName = "";
+	public String userName = "";
 	
 	DataOutputStream out ; 
 	

@@ -24,6 +24,7 @@ public class ChatActivity extends Activity {
 	EditText msgOutEt ;
 	EditText msgInEt ; 
 	EditText serverNameEt ;
+	EditText userNameEt ; 
 	
 	ChatClient client ; 
 
@@ -39,6 +40,7 @@ public class ChatActivity extends Activity {
 		
 		this.msgOutEt = (EditText) findViewById( R.id.chat_message_output );
 		this.msgInEt = (EditText) findViewById( R.id.chat_input_message ); 
+		this.userNameEt = (EditText) findViewById( R.id.chat_user_name ) ; 
 		
 		this.connBtn.setOnClickListener( new OnClickListener() { 
 			@Override
@@ -59,7 +61,10 @@ public class ChatActivity extends Activity {
 	
 	public void connectServer() {
 		String serverName = "" + this.serverNameEt.getText() ; 
+		String userName ="" + this.userNameEt.getText() ; 
 		this.client = new ChatClient( serverName );
+		this.client.userName = userName ; 
+		
 		client.execute( this );
 	}
 	
