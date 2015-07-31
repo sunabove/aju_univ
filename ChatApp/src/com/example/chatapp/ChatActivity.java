@@ -62,10 +62,16 @@ public class ChatActivity extends Activity {
 	public void connectServer() {
 		String serverName = "" + this.serverNameEt.getText() ; 
 		String userName ="" + this.userNameEt.getText() ; 
-		this.client = new ChatClient( serverName );
+		this.client = new ChatClient( serverName.trim() );
 		this.client.userName = userName ; 
 		
 		client.execute( this );
+		
+		this.msgOutEt.append( "connected" );
+	}
+	
+	public void println( String msg ) {
+		this.msgOutEt.append( msg + "\r\n" );
 	}
 	
 	public void sendMsg( String msg ) {

@@ -28,9 +28,9 @@ public class ChatClient extends ChatObject {
 		
 		String msg ; 
 		try {
-			System.out.println("Connecting to " + serverName + " on port " + port);
+			chatActivity.println("Connecting to " + serverName + " on port " + port);
 			Socket socket = new Socket(serverName, port);
-			System.out.println("Just connected to " + socket.getRemoteSocketAddress());
+			chatActivity.println("Just connected to " + socket.getRemoteSocketAddress());
 			this.out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			
