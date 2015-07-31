@@ -4,44 +4,43 @@ import java.net.*;
 import java.util.Scanner;
 import java.io.*;
 
-public class ChatClient extends ChatObject {
-	
-	boolean showMsgPrompt = false ;  
+import com.example.chatapp.ChatActivity;
+
+public class ChatClient extends ChatObject { 
 	boolean goOn ;
 	
-	public ChatClient() {
-		
+	String serverName = "192.168.0.12"; // ip address of computer to connect //
+	int port = 1000;
+	
+	String userName = "";
+	
+	DataOutputStream out ; 
+	
+	ChatActivity chatActivity ; 
+	
+	public ChatClient( String serverName ) {
+		this.serverName = serverName ; 
 	}
 	
-	public void execute() {
-		String serverName = "192.168.0.12"; // ip address of computer to connect //
-		int port = 1000;
+	public void execute(ChatActivity chatActivity ) { 
+
+		this.chatActivity = chatActivity ;  
+		
 		String msg ; 
 		try {
 			System.out.println("Connecting to " + serverName + " on port " + port);
 			Socket socket = new Socket(serverName, port);
 			System.out.println("Just connected to " + socket.getRemoteSocketAddress());
-			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+			this.out = new DataOutputStream(socket.getOutputStream());
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			
-			// read user name and send it to the server at first
-			Scanner scanner = new Scanner( System.in );
-			String userName = "";
-			msg = "Enter your name : ";
-			while( userName.length() < 3 ) { 
-				userName = scanner.nextLine();
-				if( userName.length() < 3 ) {
-					msg = "Your name is too short." ;  
-				}
-			}
-			
+			// read user name and send it to the server at first   
 			String nameInfo = "\\name " + userName ;
 			out.writeUTF(  nameInfo );
 			// end of read user name and sending it.
 			
 			this.goOn = true ; 
-			this.executeReadThread(in);
-			this.executeWriteThread(out);  
+			this.executeReadThread(in); 
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,11 +56,9 @@ public class ChatClient extends ChatObject {
 				while (goOn) {
 					try {
 						msg = in.readUTF();
-						// Output -> Activity
-						if( showMsgPrompt ) {
-							showMsgPrompt = false ;  
-							showMsgPrompt = true;
-						} else if( ! showMsgPrompt ){ 
+						// Output -> Activity 
+						if( chatActivity != null ) {
+							chatActivity.receiveMsg( msg );
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -78,43 +75,15 @@ public class ChatClient extends ChatObject {
 		thread.start();
 	}
 	
-	public void executeWriteThread(final DataOutputStream out) {
-		class MsgWriteRunnable implements Runnable {
-			public void run() {
-				String msg; 
-				msg = "Message write thread started.";  
-				
-				Scanner scanner = new Scanner( System.in ); 
-				
-				while (goOn) {
-					try {
-						// User Input -> Activity  
-						showMsgPrompt = true ; 
-						msg = scanner.nextLine();
-						if( msg.equalsIgnoreCase( "Q")) {
-							goOn = false ;
-						} else {
-							out.writeUTF( msg );
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-						goOn = false ; 
-					}
-				}
-				
-				msg = "Message write thread ended." ; 
-				
-				scanner.close();
-			}
+	public boolean sendMsg( String msg ) {
+		try {
+			this.out.writeUTF( msg );
+		} catch (IOException e) { 
+			return false ; 
 		}
 		
-		Runnable runnable = new MsgWriteRunnable() ; 
-		Thread thread = new Thread( runnable );
-		thread.start();
+		return true ; 
 	}
 	
-	public static void main(String[] args) {
-		ChatClient client = new ChatClient();
-		client.execute();
-	}
+	 
 }
