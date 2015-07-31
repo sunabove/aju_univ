@@ -65,9 +65,7 @@ public class ChatActivity extends Activity {
 		this.client = new ChatClient( serverName.trim() );
 		this.client.userName = userName ; 
 		
-		client.execute( this );
-		
-		this.msgOutEt.append( "connected" );
+		client.execute( this ); 
 	}
 	
 	public void println( String msg ) {
