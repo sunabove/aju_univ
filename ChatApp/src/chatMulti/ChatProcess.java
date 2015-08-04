@@ -55,8 +55,7 @@ public class ChatProcess extends ChatObject {
 						msg = in.readUTF(); 
 						msg = "[ " + userName + " ] " + msg ; 
 						chatServer.sendMessageToAllClients(msg);
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (IOException e) { 
 						goOn = false ; 
 					}
 				}

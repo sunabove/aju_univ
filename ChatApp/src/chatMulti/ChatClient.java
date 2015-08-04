@@ -22,31 +22,27 @@ public class ChatClient extends ChatObject {
 		this.serverName = serverName;
 	}
 
-	public void execute(ChatActivity chatActivity) {
+	public void execute(ChatActivity chatActivity) throws Exception {
 
 		this.chatActivity = chatActivity;
 
 		String msg;
-		try {
-			chatActivity.println("Connecting to " + serverName + " on port " + port);
-			Socket socket = new Socket(serverName, port);
-			chatActivity.println("Just connected to " + socket.getRemoteSocketAddress());
-			this.out = new DataOutputStream(socket.getOutputStream());
-
-			// read user name and send it to the server at first
-			String nameInfo = "\\name " + userName;
-			out.writeUTF(nameInfo);
-			// end of read user name and sending it.
-
-			DataInputStream in = new DataInputStream(socket.getInputStream());
-
-			this.goOn = true;
-			this.executeReadThread(in);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
+		chatActivity.println("Connecting to " + serverName + " on port " + port);
+		Socket socket = new Socket(serverName, port);
+		chatActivity.println("Connected to " + socket.getRemoteSocketAddress());
+		this.out = new DataOutputStream(socket.getOutputStream());
+
+		// read user name and send it to the server at first
+		String nameInfo = "\\name " + userName;
+		out.writeUTF(nameInfo);
+		// end of read user name and sending it.
+
+		DataInputStream in = new DataInputStream(socket.getInputStream());
+
+		this.goOn = true;
+		this.executeReadThread(in);
+
 	}
 
 	public void executeReadThread(final DataInputStream in) {

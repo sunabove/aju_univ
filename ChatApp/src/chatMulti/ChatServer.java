@@ -25,6 +25,7 @@ public class ChatServer extends ChatObject implements Runnable {
 
 		while (serverSocket != null) {
 			try {
+				int port = serverSocket.getLocalPort();  
 				msg = "Waiting for client on port " + serverSocket.getLocalPort() + "...";
 				println(msg);
 

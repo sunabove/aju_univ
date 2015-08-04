@@ -26,7 +26,9 @@ public class ChatActivity extends Activity {
 	EditText serverNameEt;
 	EditText userNameEt;
 
-	ChatClient client;
+	ChatClient chatClient;
+	
+	Handler handler = new Handler(); 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,39 +61,65 @@ public class ChatActivity extends Activity {
 
 	}
 
-	public void connectServer() {
-		Handler handler = new Handler();
+	public void connectServer() { 
 
 		Runnable runnable = new Runnable() {
 			public void run() {
+				/*StrictMode.enableDefaults();
+				
 				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 				StrictMode.setThreadPolicy(policy);
+				*/
 
 				String serverName = "" + serverNameEt.getText();
 				String userName = "" + userNameEt.getText();
+				
 				ChatActivity activity = ChatActivity.this;
-				activity.client = new ChatClient(serverName.trim());
-				activity.client.userName = userName;
+				
+				activity.chatClient = new ChatClient(serverName.trim());
+				ChatClient chatClient = activity.chatClient ; 
+				chatClient.userName = userName;
 
-				activity.client.execute(activity);
+				String msg = null;
+				try { 
+					chatClient.execute(activity);
+				} catch (Exception e) {
+					msg = "Error while connecting the server :" + e.getLocalizedMessage() ;
+				}
+				
+				if( msg != null ) {
+					println( msg );
+				}
 			}
 		};
-
-		handler.postDelayed(runnable, 0);
+		
+		boolean runUsingThread = true ;
+		if( runUsingThread ) { 
+			// There is no error when connect the server by using a thread
+			Thread thread = new Thread( runnable) ;
+			thread.start();
+		} else { 		
+			// this code may cause an error when connect the server by using a handler
+			handler.postDelayed( runnable, 0 ); 
+		} 
 
 	}
 
-	public void println(String msg) {
-		this.msgOutEt.append(msg + "\r\n");
+	public void println(final String msg) {
+		Runnable runnable = new Runnable() {
+			public void run() {
+				msgOutEt.append(msg + "\r\n");
+			}
+		};
+		
+		handler.postDelayed(runnable, 0);		
 	}
 
 	public void sendMsg(String msg) {
-		if (this.client != null) {
-			this.client.sendMsg(msg);
+		if (this.chatClient != null) {
+			this.chatClient.sendMsg(msg);
 		}
 	}
-
-	Handler handler = new Handler();
 
 	public void receiveMsg(final String msg) {
 
